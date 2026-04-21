@@ -74,6 +74,85 @@
       padding-top: 0.5rem;
     }
   }
+
+  /* Custom Header Styles */
+  {%- if section.settings.enable_custom_header -%}
+  @media screen and (min-width: 990px) {
+    .header.custom-header-layout {
+      grid-template-areas: 'heading navigation icons';
+      grid-template-columns: auto 1fr auto;
+      padding: 0 !important;
+    }
+
+    .header.custom-header-layout .header__heading,
+    .header.custom-header-layout .header__heading-link {
+      justify-self: start;
+      text-align: left;
+    }
+
+    .header.custom-header-layout .header__inline-menu {
+      justify-self: center;
+      margin-left: {{ section.settings.menu_margin_left }}% !important;
+      margin-right: {{ section.settings.menu_margin_right }}% !important;
+    }
+
+    .header.custom-header-layout .header__inline-menu > .list-menu--inline {
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 10px;
+    }
+
+    .header.custom-header-layout .header__menu-item {
+      padding: 1.2rem 0.6rem;
+      font-size: {{ section.settings.menu_font_size }}px;
+      font-family: {{ section.settings.menu_font.family }}, {{ section.settings.menu_font.fallback_families }};
+      font-weight: 500 !important;
+      color: {{ section.settings.menu_color }} !important;
+      text-decoration: none !important;
+    }
+
+    .header.custom-header-layout .header__menu-item span {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+
+    .header.custom-header-layout .header__menu-item:hover {
+      color: {{ section.settings.menu_hover_color }} !important;
+      text-decoration: none !important;
+    }
+
+    .header.custom-header-layout .header__menu-item:hover span {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+
+    details[open] > .header.custom-header-layout .header__menu-item {
+      text-decoration: none !important;
+    }
+
+    details[open] > .header.custom-header-layout .header__menu-item span {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+
+    .header.custom-header-layout .header__icons {
+      justify-self: end;
+      margin-left: {{ section.settings.icons_margin_left }}% !important;
+      margin-right: {{ section.settings.icons_margin_right }}% !important;
+    }
+
+    .header.custom-header-layout .header__heading-logo-wrapper {
+      margin-left: {{ section.settings.logo_margin_left }}% !important;
+      margin-right: {{ section.settings.logo_margin_right }}% !important;
+    }
+  }
+
+  .header__heading-logo {
+    width: 94px;
+    height: 43px;
+    object-fit: contain;
+  }
+  {%- endif -%}
 </style>
 
 {%- style -%}
@@ -136,7 +215,7 @@
       assign localization_forms = true
     endif
   -%}
-  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.enable_custom_header %} custom-header-layout{% endif %}{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
     {%- liquid
       if section.settings.menu != blank
         render 'header-drawer'
@@ -152,27 +231,96 @@
         <h1 class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-        {%- if settings.logo != blank -%}
-          <div class="header__heading-logo-wrapper">
-            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-            {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-            {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-            {{
-              settings.logo
-              | image_url: width: 600
-              | image_tag:
-                class: 'header__heading-logo motion-reduce',
-                widths: widths,
-                height: logo_height,
-                width: settings.logo_width,
-                alt: logo_alt,
-                sizes: sizes,
-                preload: true
-            }}
-          </div>
+        {%- if section.settings.enable_custom_header -%}
+          {%- if section.settings.custom_logo != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- assign logo_alt = section.settings.custom_logo.alt | default: shop.name | escape -%}
+              {{
+                section.settings.custom_logo
+                  | image_url: width: 188
+                  | image_tag:
+                    class: 'header__heading-logo motion-reduce',
+                    alt: logo_alt,
+                    preload: true
+              }}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          {%- if settings.logo != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+              {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+              {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+              {{
+                settings.logo
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'header__heading-logo motion-reduce',
+                    widths: widths,
+                    height: logo_height,
+                    width: settings.logo_width,
+                    alt: logo_alt,
+                    sizes: sizes,
+                    preload: true
+              }}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      </a>
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if section.settings.logo_position == 'middle-center' -%}
+      {%- if request.page_type == 'index' -%}
+        <h1 class="header__heading">
+      {%- endif -%}
+      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+        {%- if section.settings.enable_custom_header -%}
+          {%- if section.settings.custom_logo != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- assign logo_alt = section.settings.custom_logo.alt | default: shop.name | escape -%}
+              {{
+                section.settings.custom_logo
+                  | image_url: width: 188
+                  | image_tag:
+                    class: 'header__heading-logo motion-reduce',
+                    alt: logo_alt,
+                    preload: true
+              }}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
+        {%- else -%}
+          {%- if settings.logo != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+              {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
+              {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+              {{
+                settings.logo
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'header__heading-logo',
+                    widths: widths,
+                    height: logo_height,
+                    width: settings.logo_width,
+                    alt: logo_alt,
+                    sizes: sizes,
+                    preload: true
+              }}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -195,27 +343,45 @@
         <h1 class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-        {%- if settings.logo != blank -%}
-          <div class="header__heading-logo-wrapper">
-            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-            {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-            {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
-            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-            {{
-              settings.logo
-              | image_url: width: 600
-              | image_tag:
-                class: 'header__heading-logo',
-                widths: widths,
-                height: logo_height,
-                width: settings.logo_width,
-                alt: logo_alt,
-                sizes: sizes,
-                preload: true
-            }}
-          </div>
+        {%- if section.settings.enable_custom_header -%}
+          {%- if section.settings.custom_logo != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- assign logo_alt = section.settings.custom_logo.alt | default: shop.name | escape -%}
+              {{
+                section.settings.custom_logo
+                  | image_url: width: 188
+                  | image_tag:
+                    class: 'header__heading-logo motion-reduce',
+                    alt: logo_alt,
+                    preload: true
+              }}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          {%- if settings.logo != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+              {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
+              {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+              {{
+                settings.logo
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'header__heading-logo',
+                    widths: widths,
+                    height: logo_height,
+                    width: settings.logo_width,
+                    alt: logo_alt,
+                    sizes: sizes,
+                    preload: true
+              }}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -647,6 +813,131 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Custom Header Design"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_header",
+      "default": false,
+      "label": "Enable custom header design"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_logo",
+      "label": "Custom logo image",
+      "info": "Recommended size: 94x43px. Only visible when custom header design is enabled.",
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "range",
+      "id": "logo_margin_left",
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Logo margin left",
+      "default": 0,
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "range",
+      "id": "logo_margin_right",
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Logo margin right",
+      "default": 0,
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "header",
+      "content": "Custom Menu Settings",
+      "info": "Only visible when custom header design is enabled."
+    },
+    {
+      "type": "font_picker",
+      "id": "menu_font",
+      "default": "sans-serif",
+      "label": "Menu font family",
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "range",
+      "id": "menu_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Menu font size",
+      "default": 16,
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "color",
+      "id": "menu_color",
+      "label": "Menu text color",
+      "default": "#121212",
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "color",
+      "id": "menu_hover_color",
+      "label": "Menu hover color",
+      "default": "#000000",
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "range",
+      "id": "menu_margin_left",
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Menu margin left",
+      "default": 0,
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "range",
+      "id": "menu_margin_right",
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Menu margin right",
+      "default": 0,
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "header",
+      "content": "Right Icons Settings",
+      "info": "Only visible when custom header design is enabled."
+    },
+    {
+      "type": "range",
+      "id": "icons_margin_left",
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Icons margin left",
+      "default": 0,
+      "visible_if": "{{ section.settings.enable_custom_header }}"
+    },
+    {
+      "type": "range",
+      "id": "icons_margin_right",
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Icons margin right",
+      "default": 0,
+      "visible_if": "{{ section.settings.enable_custom_header }}"
     }
   ],
   "blocks": [
