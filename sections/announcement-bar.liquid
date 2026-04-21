@@ -18,6 +18,85 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
+{%- if section.settings.enable_custom_announcements -%}
+<style>
+  /* YOUR REWARDS PROGRAM - Hide rewards tab */
+  .swell-tab {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  .announcement-bar--custom {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  
+  .announcement-bar__custom-container {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .announcement-bar__custom-container:hover {
+    animation-play-state: paused;
+  }
+  
+  .announcement-bar__custom-item {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  
+  .announcement-bar__custom-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+  }
+  
+  .announcement-bar__custom-link:hover {
+    opacity: 0.8;
+  }
+  
+  .announcement-bar__custom-text {
+    font-family: {{ section.settings.announcement_font.family }}, {{ section.settings.announcement_font.fallback_families }};
+    font-size: {{ section.settings.announcement_font_size }}px;
+    font-weight: {{ section.settings.announcement_font.weight }};
+    font-style: {{ section.settings.announcement_font.style }};
+  }
+  
+  .announcement-bar__separator {
+    margin: 0 12px;
+    font-size: {{ section.settings.announcement_font_size }}px;
+    opacity: 0.6;
+    color: #4A7FA5;
+  }
+  
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(calc(-100% + 100vw));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  /* For screens where content doesn't overflow, disable animation */
+  @media (min-width: 750px) {
+    .announcement-bar__custom-container.no-scroll {
+      animation: none;
+      justify-content: center;
+    }
+  }
+</style>
+{%- endif -%}
+
 <div
   class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
 >
@@ -25,7 +104,30 @@
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}
     {%- endif -%}
-    {%- if section.blocks.size == 1 -%}
+    
+    {%- if section.settings.enable_custom_announcements and section.blocks.size > 0 -%}
+      <div class="announcement-bar announcement-bar--custom" role="region" aria-label="{{ 'sections.header.announcement' | t }}">
+        <div class="announcement-bar__custom-container" data-scroll-speed="{{ section.settings.custom_scroll_speed | times: 1000 }}">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.text != blank -%}
+              <div class="announcement-bar__custom-item">
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="announcement-bar__custom-link">
+                {%- endif -%}
+                <span class="announcement-bar__custom-text">{{ block.settings.text | escape }}</span>
+                {%- if block.settings.link != blank -%}
+                  {{- 'icon-arrow.svg' | inline_asset_content -}}
+                  </a>
+                {%- endif -%}
+              </div>
+              {%- unless forloop.last -%}
+                <span class="announcement-bar__separator">•</span>
+              {%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- elsif section.blocks.size == 1 -%}
       <div
         class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
         role="region"
@@ -162,6 +264,32 @@
   </div>
 </div>
 
+{%- if section.settings.enable_custom_announcements and section.blocks.size > 0 -%}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const customContainer = document.querySelector('.announcement-bar__custom-container');
+  if (!customContainer) return;
+  
+  // Check if content overflows and disable animation if not
+  function checkOverflow() {
+    const parent = customContainer.parentElement;
+    if (customContainer.scrollWidth <= parent.clientWidth) {
+      customContainer.classList.add('no-scroll');
+      customContainer.style.animation = 'none';
+    } else {
+      customContainer.classList.remove('no-scroll');
+      // Only set animation if overflow exists
+      const animationDuration = customContainer.dataset.scrollSpeed || '30000';
+      customContainer.style.animation = `scroll-text ${animationDuration}ms linear infinite`;
+    }
+  }
+  
+  checkOverflow();
+  window.addEventListener('resize', checkOverflow);
+});
+</script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "t:sections.announcement-bar.name",
@@ -227,6 +355,72 @@
       "default": false,
       "label": "t:sections.announcement-bar.settings.enable_language_selector.label",
       "info": "t:sections.announcement-bar.settings.enable_language_selector.info"
+    },
+    {
+      "type": "header",
+      "content": "Custom Announcement Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_announcements",
+      "default": false,
+      "label": "Enable custom announcement mode",
+      "info": "Show multiple announcements in a single line separated with dots and auto-scroll overflow"
+    },
+    {
+      "type": "font_picker",
+      "id": "announcement_font",
+      "default": "sans-serif",
+      "label": "Announcement font"
+    },
+    {
+      "type": "range",
+      "id": "announcement_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Announcement font size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Announcement Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Custom Announcement Animation"
+    },
+    {
+      "type": "range",
+      "id": "custom_scroll_speed",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Animation speed (seconds)",
+      "info": "Controls how fast the announcement text scrolls back and forth",
+      "default": 30
     }
   ],
   "blocks": [
