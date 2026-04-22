@@ -4,15 +4,17 @@
     display: flex;
     align-items: center;
     background-color: {{ section.settings.background_color }};
+    width: 100%;
   }
 
   .section-multicolumn-{{ section.id }} {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     width: 100%;
-    height: 60px;
+    height: 65px;
     padding: 0 6%;
-    gap: 20.4rem;
+    padding-top: 5px;
+    gap: 20.3rem;
     overflow-x: hidden;
     scroll-behavior: smooth;
   }
@@ -21,7 +23,7 @@
     display: flex;
     align-items: center;
     color: {{ section.settings.text_color }};
-    gap: 4px;
+    gap: 5px;
     white-space: nowrap;
   }
 
@@ -41,8 +43,9 @@
     color: white;
     font-size: 20px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 100;
     padding: 10px;
+    pointer-events: auto;
   }
 
   .slider-nav-{{ section.id }}.prev { left: 5px; }
@@ -54,28 +57,47 @@
   }
 
   @media screen and (max-width: 767px) {
+    .section-container-{{ section.id }} {
+      height: 70px;
+    }
+
     .section-multicolumn-{{ section.id }} {
-      grid-template-columns: unset;
-      grid-auto-flow: column;
-      grid-auto-columns: 100%;
-      overflow-x: auto;
+      display: flex;
+      flex-direction: row;
+      overflow-x: scroll;
+      overflow-y: hidden;
       scroll-snap-type: x mandatory;
-      padding: 0;
+      padding: 0 50px;
+      width: 100%;
+      height: 100%;
+      -webkit-overflow-scrolling: touch;
     }
 
     .column-{{ section.id }} {
+      min-width: 100%;
+      flex-shrink: 0;
       scroll-snap-align: center;
       justify-content: center;
     }
 
     .slider-nav-{{ section.id }} {
       display: block;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .slider-nav-{{ section.id }}.prev { left: 10px; }
+    .slider-nav-{{ section.id }}.next { right: 10px; }
+    .column-{{ section.id }} .icon-text {
+      align-self: center;
     }
   }
 {%- endstyle -%}
 
-<div class="section-container-{{ section.id }}">
-  <button class="slider-nav-{{ section.id }} prev" onclick="scrollSlider{{ section.id }}(-1)" aria-label="Previous">
+<div class="section-container-{{ section.id }}" data-section-id="{{ section.id }}">
+  <button class="slider-nav-{{ section.id }} prev" data-direction="-1" aria-label="Previous">
     <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M0.29277 7.071L5.94977 12.728L7.36377 11.314L2.41377 6.364L7.36377 1.414L5.94977 0L0.29277 5.657C0.105299 5.84453 -1.66893e-05 6.09884 -1.66893e-05 6.364C-1.66893e-05 6.62916 0.105299 6.88347 0.29277 7.071Z" fill="white" />
     </svg>
@@ -229,7 +251,7 @@
     </div>
   </div>
 
-  <button class="slider-nav-{{ section.id }} next" onclick="scrollSlider{{ section.id }}(1)" aria-label="Next">
+  <button class="slider-nav-{{ section.id }} next" data-direction="1" aria-label="Next">
     <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M7.071 7.071L1.414 12.728L0 11.314L4.95 6.364L0 1.414L1.414 0L7.071 5.657C7.25847 5.84453 7.36379 6.09884 7.36379 6.364C7.36379 6.62916 7.25847 6.88347 7.071 7.071Z" fill="white" />
     </svg>
@@ -237,14 +259,44 @@
 </div>
 
 <script>
-  function scrollSlider{{ section.id }}(direction) {
+  (function() {
+    const container = document.querySelector('.section-container-{{ section.id }}[data-section-id="{{ section.id }}"]');
+    if (!container) return;
+    
     const slider = document.getElementById('slider-{{ section.id }}');
-    const scrollAmount = slider.clientWidth;
-    slider.scrollBy({
-      left: direction * scrollAmount,
-      behavior: 'smooth'
+    if (!slider) return;
+    
+    const buttons = container.querySelectorAll('.slider-nav-{{ section.id }}');
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const direction = parseInt(this.getAttribute('data-direction'));
+        const scrollAmount = slider.clientWidth;
+        const currentScroll = slider.scrollLeft;
+        const targetScroll = currentScroll + (direction * scrollAmount);
+        
+        slider.scrollTo({
+          left: targetScroll,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Add touch support for mobile
+      button.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        const direction = parseInt(this.getAttribute('data-direction'));
+        const scrollAmount = slider.clientWidth;
+        const currentScroll = slider.scrollLeft;
+        const targetScroll = currentScroll + (direction * scrollAmount);
+        
+        slider.scrollTo({
+          left: targetScroll,
+          behavior: 'smooth'
+        });
+      });
     });
-  }
+  })();
 </script>
 
 {% schema %}

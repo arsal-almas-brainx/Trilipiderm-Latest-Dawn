@@ -128,6 +128,19 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
+    "icon_slider_gPmijt": {
+      "type": "icon-slider",
+      "name": "Icon Slider",
+      "settings": {
+        "background_color": "#1B2D4F",
+        "text_color": "#FFFFFF",
+        "font_size": 14,
+        "text_1": "Clinically-Driven Skincare",
+        "text_2": "Eco-Friendly Commitment",
+        "text_3": "100K+ Trust Us",
+        "text_4": "Cruelty Free"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -159,6 +172,7 @@
   },
   "order": [
     "slideshow_z6cMWz",
+    "icon_slider_gPmijt",
     "featured_collection"
   ]
 }
