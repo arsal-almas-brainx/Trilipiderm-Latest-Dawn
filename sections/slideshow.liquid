@@ -90,6 +90,14 @@
   .custom-icon {
     width: 82px;
     height: 92px;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-icon {
+      width: 60px;
+      height: 60px;
+    }
   }
 
   .custom-slide-right {
@@ -381,20 +389,34 @@
               </div>
               <div class="custom-icons-container">
                 {%- if block.settings.custom_icon_1 != blank -%}
-                  {%- assign icon_1_height = block.settings.custom_icon_1.height | default: 92 -%}
-                  {%- if forloop.first == false -%}
-                    {{ block.settings.custom_icon_1 | image_url: width: 164, height: icon_1_height | image_tag: class: 'custom-icon', loading: 'lazy', width: 82, height: icon_1_height }}
-                  {%- else -%}
-                    {{ block.settings.custom_icon_1 | image_url: width: 164, height: icon_1_height | image_tag: class: 'custom-icon', width: 82, height: icon_1_height }}
-                  {%- endif -%}
+                  {{ block.settings.custom_icon_1 | image_url: width: 164, height: 184 | image_tag: 
+                    class: 'custom-icon', 
+                    loading: 'lazy', 
+                    width: 82, 
+                    height: 92,
+                    sizes: '(max-width: 749px) 60px, 82px',
+                    widths: '82, 164'
+                  }}
                 {%- endif -%}
                 {%- if block.settings.custom_icon_2 != blank -%}
-                  {%- assign icon_2_height = block.settings.custom_icon_2.height | default: 92 -%}
-                  {{ block.settings.custom_icon_2 | image_url: width: 164, height: icon_2_height | image_tag: class: 'custom-icon', loading: 'lazy', width: 82, height: icon_2_height }}
+                  {{ block.settings.custom_icon_2 | image_url: width: 164, height: 184 | image_tag: 
+                    class: 'custom-icon', 
+                    loading: 'lazy', 
+                    width: 82, 
+                    height: 92,
+                    sizes: '(max-width: 749px) 60px, 82px',
+                    widths: '82, 164'
+                  }}
                 {%- endif -%}
                 {%- if block.settings.custom_icon_3 != blank -%}
-                  {%- assign icon_3_height = block.settings.custom_icon_3.height | default: 92 -%}
-                  {{ block.settings.custom_icon_3 | image_url: width: 164, height: icon_3_height | image_tag: class: 'custom-icon', loading: 'lazy', width: 82, height: icon_3_height }}
+                  {{ block.settings.custom_icon_3 | image_url: width: 164, height: 184 | image_tag: 
+                    class: 'custom-icon', 
+                    loading: 'lazy', 
+                    width: 82, 
+                    height: 92,
+                    sizes: '(max-width: 749px) 60px, 82px',
+                    widths: '82, 164'
+                  }}
                 {%- endif -%}
               </div>
             </div>
