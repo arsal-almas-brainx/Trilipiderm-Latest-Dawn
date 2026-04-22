@@ -159,6 +159,11 @@
   .header {
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
+  @media screen and (max-width: 767px) {
+    .header {
+      padding: 6px 2rem;
+    }
+  }
 
   .section-header {
     position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */

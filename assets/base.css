@@ -2517,7 +2517,7 @@ input[type='checkbox'] {
   .header__icons {
     padding-right: 0rem;
     justify-self: auto;
-    margin-left: 17%;
+    padding-left: 17%;
   }
 }
 
@@ -2539,7 +2539,7 @@ input[type='checkbox'] {
 
   .header__icon:not(.header__icon--summary),
   .header__icon span {
-    margin-left: -7%;
+    margin-left: -10%;
   }
 }
 
