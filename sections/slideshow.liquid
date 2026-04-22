@@ -92,6 +92,38 @@
     height: 92px;
   }
 
+  .custom-slide-right {
+    position: relative;
+  }
+
+  .custom-nav-buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 44%;
+    padding-left: 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .custom-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  .custom-nav-btn:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+
   @media screen and (max-width: 767px) {
     .custom-slide-right {
       order: 1 !important;
@@ -128,11 +160,46 @@
       object-fit: cover !important;
       object-position: center !important;
     }
+    .custom-nav-buttons {
+      left: 16px !important;
+      padding-left: 0 !important;
+      bottom: 41rem;
+    }
   }
 
   .slideshow__slide--custom {
     width: 100%;
   }
+
+  [data-custom-layout="true"].banner {
+    min-height: auto !important;
+  }
+
+  [data-custom-layout="true"].banner::before,
+  [data-custom-layout="true"] .banner__media::before {
+    display: none !important;
+  }
+
+  .slideshow__slide--custom .banner::after,
+  .slideshow__slide--custom .banner__media::after {
+    pointer-events: none;
+  }
+
+  .slideshow__slide--custom .custom-slide-left {
+    position: relative;
+    z-index: 2;
+  }
+
+  .slideshow__slide--custom .custom-slide-right {
+    position: relative;
+    z-index: 1;
+  }
+
+  {%- if section.settings.enable_custom_layout -%}
+  .slideshow__controls {
+    display: none !important;
+  }
+  {%- endif -%}
 {%- endstyle -%}
 
 {%- if section.settings.slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}
@@ -164,7 +231,7 @@
   aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
   aria-label="{{ section.settings.accessibility_info | escape }}"
 >
-  {%- if section.settings.auto_rotate and section.blocks.size > 1 -%}
+  {%- if section.settings.auto_rotate or section.settings.enable_custom_layout and section.blocks.size > 1 -%}
     <div class="slideshow__controls slideshow__controls--top slider-buttons{% if section.settings.show_text_below %} slideshow__controls--border-radius-mobile{% endif %}">
       <button
         type="button"
@@ -213,10 +280,10 @@
         </span>
       </button>
 
-      {%- if section.settings.auto_rotate -%}
+      {%- if section.settings.auto_rotate or section.settings.enable_custom_layout -%}
         <button
           type="button"
-          class="slideshow__autoplay slider-button{% if section.settings.auto_rotate == false %} slideshow__autoplay--paused{% endif %}"
+          class="slideshow__autoplay slider-button{% if section.settings.auto_rotate == false and section.settings.enable_custom_layout == false %} slideshow__autoplay--paused{% endif %}"
           aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}"
         >
           <span class="svg-wrapper">
@@ -235,8 +302,9 @@
     id="Slider-{{ section.id }}"
     aria-live="polite"
     aria-atomic="true"
-    data-autoplay="{{ section.settings.auto_rotate }}"
-    data-speed="{{ section.settings.change_slides_speed }}"
+    data-autoplay="{% if section.settings.enable_custom_layout %}true{% else %}{{ section.settings.auto_rotate }}{% endif %}"
+    data-speed="{% if section.settings.enable_custom_layout %}{{ section.settings.custom_autoplay_speed }}{% else %}{{ section.settings.change_slides_speed }}{% endif %}"
+    data-custom-layout="{{ section.settings.enable_custom_layout }}"
   >
     {%- for block in section.blocks -%}
       <style>
@@ -445,7 +513,7 @@
     {%- endfor -%}
   </div>
 
-  {%- if section.blocks.size > 1 and section.settings.auto_rotate == false -%}
+  {%- if section.blocks.size > 1 -%}
     <div class="slideshow__controls slider-buttons{% if section.settings.show_text_below %} slideshow__controls--border-radius-mobile{% endif %}">
       <button
         type="button"
@@ -494,10 +562,10 @@
         </span>
       </button>
 
-      {%- if section.settings.auto_rotate -%}
+      {%- if section.settings.auto_rotate or section.settings.enable_custom_layout -%}
         <button
           type="button"
-          class="slideshow__autoplay slider-button{% if section.settings.auto_rotate == false %} slideshow__autoplay--paused{% endif %}"
+          class="slideshow__autoplay slider-button{% if section.settings.auto_rotate == false and section.settings.enable_custom_layout == false %} slideshow__autoplay--paused{% endif %}"
           aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}"
         >
           <span class="svg-wrapper">
@@ -510,10 +578,57 @@
       {%- endif -%}
     </div>
   {%- endif -%}
+
+  {%- if section.settings.enable_custom_layout and section.blocks.size > 1 -%}
+    <div class="custom-nav-buttons">
+      <button type="button" class="custom-nav-btn custom-nav-prev" aria-label="Previous slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button type="button" class="custom-nav-btn custom-nav-next" aria-label="Next slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  {%- endif -%}
 </slideshow-component>
 
 {%- if request.design_mode -%}
   <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if section.settings.enable_custom_layout -%}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slideshowEl = document.querySelector('slideshow-component');
+    if (!slideshowEl) return;
+    const slider = slideshowEl.querySelector('#Slider-{{ section.id }}');
+    if (!slider) return;
+
+    // Nav buttons - use scroll-based navigation
+    const prevBtn = slideshowEl.querySelector('.custom-nav-prev');
+    const nextBtn = slideshowEl.querySelector('.custom-nav-next');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function() {
+        if (slider.scrollLeft <= 0) {
+          slider.scrollTo({ left: slider.scrollWidth, behavior: 'smooth' });
+        } else {
+          slider.scrollBy({ left: -slider.offsetWidth, behavior: 'smooth' });
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function() {
+        const scrollPos = slider.scrollLeft + slider.offsetWidth;
+        if (scrollPos >= slider.scrollWidth) {
+          slider.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          slider.scrollBy({ left: slider.offsetWidth, behavior: 'smooth' });
+        }
+      });
+    }
+  });
+</script>
 {%- endif -%}
 
 {% schema %}
@@ -627,6 +742,17 @@
       "label": "Enable Custom Slideshow Layout",
       "default": false,
       "info": "When enabled, slides will use custom 42%/58% split layout with additional settings"
+    },
+    {
+      "type": "range",
+      "id": "custom_autoplay_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Custom Slideshow Auto-rotate Speed",
+      "default": 5,
+      "info": "Only applies when Custom Slideshow Layout is enabled"
     },
     {
       "type": "header",

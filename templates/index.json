@@ -9,62 +9,141 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "slideshow_z6cMWz": {
+      "type": "slideshow",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "slide_RxVzDr": {
+          "type": "slide",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "",
+            "custom_txt_1": "NEW - SPRING REVIVAL COLLECTION",
+            "custom_txt_1_color": "#4a7fa5",
+            "custom_txt_1_size": 10,
+            "custom_txt_2": "Barrier Repair Starts Here",
+            "custom_txt_2_color": "#1a1a1a",
+            "custom_txt_2_size": 50,
+            "custom_txt_3": "Science-backed actives meet clean botanicals. Our patented Medayssinian Lipid Complex rebuilds your skin barrier from the inside out.",
+            "custom_txt_3_color": "#4f4f4f",
+            "custom_txt_3_size": 14,
+            "custom_left_button_text": "SHOP NOW",
+            "custom_left_button_link": "shopify://pages/new_home_page_1748012686316",
+            "custom_left_button_bg": "#4a7fa5",
+            "custom_left_button_text_color": "#ffffff",
+            "custom_left_button_border": 0,
+            "custom_left_button_border_color": "#000000",
+            "custom_right_button_text": "FIND MY ROUTINE",
+            "custom_right_button_link": "shopify://pages/new_home_page_1748012686316",
+            "custom_right_button_bg": "#f5f5f5",
+            "custom_right_button_text_color": "#1a1a1a",
+            "custom_right_button_border": 2,
+            "custom_right_button_border_color": "#1a1a1a",
+            "custom_star_color": "#ffaa00",
+            "custom_star_width": 24,
+            "custom_star_height": 24,
+            "custom_rating_text": "Join 100,000+ Happy Customers",
+            "custom_rating_text_color": "#1a1a1a",
+            "custom_rating_text_size": 14,
+            "custom_icon_1": "shopify://shop_images/Group_1000015121.png",
+            "custom_icon_2": "shopify://shop_images/Group_1000015121.png",
+            "custom_icon_3": "shopify://shop_images/Group_1000015121.png",
+            "custom_media_type": "video",
+            "custom_right_image": "shopify://shop_images/Rectangle_2.jpg",
+            "custom_right_video_url": ""
           }
         },
-        "button": {
-          "type": "buttons",
+        "slide_MqcazG": {
+          "type": "slide",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "",
+            "custom_txt_1": "New - Spring Revival Collection",
+            "custom_txt_1_color": "#000000",
+            "custom_txt_1_size": 10,
+            "custom_txt_2": "Barrier Repair Starts Here",
+            "custom_txt_2_color": "#000000",
+            "custom_txt_2_size": 50,
+            "custom_txt_3": "Science-backed actives meet clean botanicals. Our patented Medayssinian Lipid Complex rebuilds your skin barrier from the inside out.",
+            "custom_txt_3_color": "#000000",
+            "custom_txt_3_size": 14,
+            "custom_left_button_text": "SHOP NOW",
+            "custom_left_button_link": "",
+            "custom_left_button_bg": "#000000",
+            "custom_left_button_text_color": "#ffffff",
+            "custom_left_button_border": 0,
+            "custom_left_button_border_color": "#000000",
+            "custom_right_button_text": "FIND MY ROUTINE",
+            "custom_right_button_link": "",
+            "custom_right_button_bg": "#ffffff",
+            "custom_right_button_text_color": "#000000",
+            "custom_right_button_border": 0,
+            "custom_right_button_border_color": "#000000",
+            "custom_star_color": "#ffaa00",
+            "custom_star_width": 24,
+            "custom_star_height": 24,
+            "custom_rating_text": "Join 100,000+ Happy Customers",
+            "custom_rating_text_color": "#000000",
+            "custom_rating_text_size": 14,
+            "custom_media_type": "image",
+            "custom_right_video": "shopify://files/videos/10001-0210.mp4",
+            "custom_right_video_url": ""
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "slide_RxVzDr",
+        "slide_MqcazG"
       ],
+      "name": "t:sections.slideshow.presets.name",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
         "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "enable_custom_layout": true,
+        "custom_autoplay_speed": 5,
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
+        "collection": "all",
+        "products_to_show": 8,
         "title": "Featured products",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -72,13 +151,14 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "image_banner",
+    "slideshow_z6cMWz",
     "featured_collection"
   ]
 }
