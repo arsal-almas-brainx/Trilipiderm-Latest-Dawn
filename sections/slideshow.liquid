@@ -6,6 +6,133 @@
   .custom-slide-section {
     display: grid;
     grid-template-columns: 44% 56%;
+  }
+
+  .custom-buttons-container {
+    display: grid;
+    grid-template-columns: 37.5% 49.5%;
+    gap: 2%;
+  }
+
+  .custom-rating-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .custom-stars {
+    display: flex;
+  }
+
+  .custom-rating-text {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .custom-img-container {
+    width: 100%;
+    height: 502px;
+  }
+
+  .custom-right-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .custom-slide-left {
+    padding-left: 14%;
+    padding-right: 10%;
+    padding-top: 40px;
+  }
+
+  .custom-txt-1 {
+    font-size: 10px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 3px;
+  }
+
+  .custom-txt-2 {
+    font-size: 50px;
+    font-weight: 700;
+    margin: 0;
+    margin-top: 4px;
+    line-height: 55.5px;
+  }
+
+  .custom-txt-3 {
+    font-size: 14px;
+    line-height: 23px;
+    margin-top: 4px;
+  }
+
+  .custom-left-button,
+  .custom-right-button {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 8px 14px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .custom-icons-container {
+    display: flex;
+    margin-top: 20px;
+    gap: 3%;
+  }
+
+  .custom-icon {
+    width: 82px;
+    height: 92px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .custom-slide-right {
+      order: 1;
+    }
+    .custom-slide-left {
+      order: 2;
+    }
+    .custom-txt-1 {
+      margin-top: 2%;
+    }
+    .custom-txt-2 {
+      font-size: 24px;
+      margin-top: -2px;
+    }
+    .custom-txt-3 {
+      margin-top: -3px;
+    }
+    .custom-slide-left {
+      padding: 3% 2%;
+      padding-right: 4%;
+    }
+    .custom-slide-section {
+      grid-template-columns: 1fr;
+    }
+    .custom-img-container {
+      height: 374px;
+    }
+    .custom-right-media {
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .slideshow__slide--custom {
+    width: 100%;
+  }
+{%- endstyle -%}
+
+{%- style -%}
+  .custom-slide-section {
+    display: grid;
+    grid-template-columns: 44% 56%;
     background-color: {{ section.settings.custom_background_color }};
   }
 
@@ -369,6 +496,127 @@
           </div>
         {%- else -%}
           {%- comment -%} Default Layout {%- endcomment -%}
+        {%- if section.settings.enable_custom_layout -%}
+          {%- comment -%} Custom Layout {%- endcomment -%}
+          <div class="custom-slide-section">
+            <!-- Left -->
+            <div class="custom-slide-left">
+              {%- if block.settings.custom_txt_1 != blank -%}
+                <p class="custom-txt-1" style="color: {{ block.settings.custom_txt_1_color }}; font-size: {{ block.settings.custom_txt_1_size }}px;">{{ block.settings.custom_txt_1 }}</p>
+              {%- endif -%}
+              {%- if block.settings.custom_txt_2 != blank -%}
+                <h1 class="custom-txt-2" style="color: {{ block.settings.custom_txt_2_color }}; font-size: {{ block.settings.custom_txt_2_size }}px;">{{ block.settings.custom_txt_2 }}</h1>
+              {%- endif -%}
+              {%- if block.settings.custom_txt_3 != blank -%}
+                <p class="custom-txt-3" style="color: {{ block.settings.custom_txt_3_color }}; font-size: {{ block.settings.custom_txt_3_size }}px; font-weight:300;">{{ block.settings.custom_txt_3 }}</p>
+              {%- endif -%}
+              <div class="custom-buttons-container">
+                {%- if block.settings.custom_left_button_text != blank -%}
+                  <a
+                    {% if block.settings.custom_left_button_link %} href="{{ block.settings.custom_left_button_link }}"{% else %} role="link" aria-disabled="true"{% endif %}
+                    class="custom-left-button"
+                    style="background-color: {{ block.settings.custom_left_button_bg }}; color: {{ block.settings.custom_left_button_text_color }}; border-width: {{ block.settings.custom_left_button_border }}px; border-color: {{ block.settings.custom_left_button_border_color }}; border-style: solid;"
+                  >
+                    {{ block.settings.custom_left_button_text }}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.custom_right_button_text != blank -%}
+                  <a
+                    {% if block.settings.custom_right_button_link %} href="{{ block.settings.custom_right_button_link }}"{% else %} role="link" aria-disabled="true"{% endif %}
+                    class="custom-right-button"
+                    style="background-color: {{ block.settings.custom_right_button_bg }}; color: {{ block.settings.custom_right_button_text_color }}; border-width: {{ block.settings.custom_right_button_border }}px; border-color: {{ block.settings.custom_right_button_border_color }}; border-style: solid;"
+                  >
+                    {{ block.settings.custom_right_button_text }}
+                  </a>
+                {%- endif -%}
+              </div>
+              <div class="custom-rating-container">
+                <div class="custom-stars">
+                  <svg viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: {{ block.settings.custom_star_width }}px; height: {{ block.settings.custom_star_height }}px;">
+                    <path d="M10 15.27L16.18 19L14.54 11.97L20 7.24L12.81 6.62L10 0L7.19 6.62L0 7.24L5.45 11.97L3.82 19L10 15.27Z" fill="{{ block.settings.custom_star_color }}" />
+                  </svg>
+                  <svg viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: {{ block.settings.custom_star_width }}px; height: {{ block.settings.custom_star_height }}px;">
+                    <path d="M10 15.27L16.18 19L14.54 11.97L20 7.24L12.81 6.62L10 0L7.19 6.62L0 7.24L5.45 11.97L3.82 19L10 15.27Z" fill="{{ block.settings.custom_star_color }}" />
+                  </svg>
+                  <svg viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: {{ block.settings.custom_star_width }}px; height: {{ block.settings.custom_star_height }}px;">
+                    <path d="M10 15.27L16.18 19L14.54 11.97L20 7.24L12.81 6.62L10 0L7.19 6.62L0 7.24L5.45 11.97L3.82 19L10 15.27Z" fill="{{ block.settings.custom_star_color }}" />
+                  </svg>
+                  <svg viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: {{ block.settings.custom_star_width }}px; height: {{ block.settings.custom_star_height }}px;">
+                    <path d="M10 15.27L16.18 19L14.54 11.97L20 7.24L12.81 6.62L10 0L7.19 6.62L0 7.24L5.45 11.97L3.82 19L10 15.27Z" fill="{{ block.settings.custom_star_color }}" />
+                  </svg>
+                  <svg viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: {{ block.settings.custom_star_width }}px; height: {{ block.settings.custom_star_height }}px;">
+                    <path d="M10 15.27L16.18 19L14.54 11.97L20 7.24L12.81 6.62L10 0L7.19 6.62L0 7.24L5.45 11.97L3.82 19L10 15.27Z" fill="{{ block.settings.custom_star_color }}" />
+                  </svg>
+                </div>
+                {%- if block.settings.custom_rating_text != blank -%}
+                  <div class="custom-rating-text" style="color: {{ block.settings.custom_rating_text_color }}; font-size: {{ block.settings.custom_rating_text_size }}px;">
+                    {{ block.settings.custom_rating_text }}
+                  </div>
+                {%- endif -%}
+              </div>
+              <div class="custom-icons-container">
+                {%- if block.settings.custom_icon_1 != blank -%}
+                  {%- assign icon_1_height = block.settings.custom_icon_1.height | default: 92 -%}
+                  {%- if forloop.first == false -%}
+                    {{ block.settings.custom_icon_1 | image_url: width: 164, height: icon_1_height | image_tag: class: 'custom-icon', loading: 'lazy', width: 82, height: icon_1_height }}
+                  {%- else -%}
+                    {{ block.settings.custom_icon_1 | image_url: width: 164, height: icon_1_height | image_tag: class: 'custom-icon', width: 82, height: icon_1_height }}
+                  {%- endif -%}
+                {%- endif -%}
+                {%- if block.settings.custom_icon_2 != blank -%}
+                  {%- assign icon_2_height = block.settings.custom_icon_2.height | default: 92 -%}
+                  {{ block.settings.custom_icon_2 | image_url: width: 164, height: icon_2_height | image_tag: class: 'custom-icon', loading: 'lazy', width: 82, height: icon_2_height }}
+                {%- endif -%}
+                {%- if block.settings.custom_icon_3 != blank -%}
+                  {%- assign icon_3_height = block.settings.custom_icon_3.height | default: 92 -%}
+                  {{ block.settings.custom_icon_3 | image_url: width: 164, height: icon_3_height | image_tag: class: 'custom-icon', loading: 'lazy', width: 82, height: icon_3_height }}
+                {%- endif -%}
+              </div>
+            </div>
+            <!-- Right -->
+            <div class="custom-slide-right">
+              <div class="custom-img-container">
+                {%- if block.settings.custom_right_image != blank -%}
+                  {%- liquid
+                    assign img_height = block.settings.custom_right_image.width | divided_by: block.settings.custom_right_image.aspect_ratio | round
+                    assign img_sizes = '58vw'
+                    assign img_widths = '375, 550, 750, 1100, 1500, 1780, 2000'
+                    assign img_fetch_priority = 'auto'
+                    if forloop.first and section.index == 1
+                      assign img_fetch_priority = 'high'
+                    endif
+                  -%}
+                  {%- if forloop.first and section.index == 1 -%}
+                    {{ block.settings.custom_right_image | image_url: width: 2000 | image_tag: height: img_height, sizes: img_sizes, widths: img_widths, fetchpriority: img_fetch_priority, class: 'custom-right-media' }}
+                  {%- else -%}
+                    {{ block.settings.custom_right_image | image_url: width: 2000 | image_tag: loading: 'lazy', height: img_height, sizes: img_sizes, widths: img_widths, class: 'custom-right-media' }}
+                  {%- endif -%}
+                {%- elsif block.settings.custom_right_video != blank -%}
+                  {{ block.settings.custom_right_video | video_tag: class: 'custom-right-media', autoplay: true, loop: true, muted: true, controls: false, loading: 'lazy' }}
+                {%- elsif block.settings.custom_right_video_url != blank -%}
+                  {%- if block.settings.custom_right_video_url.type == 'youtube' -%}
+                    <iframe
+                      class="custom-right-media"
+                      src="https://www.youtube.com/embed/{{ block.settings.custom_right_video_url.id }}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist={{ block.settings.custom_right_video_url.id }}"
+                      allow="autoplay; encrypted-media"
+                      loading="lazy"
+                    ></iframe>
+                  {%- elsif block.settings.custom_right_video_url.type == 'vimeo' -%}
+                    <iframe
+                      class="custom-right-media"
+                      src="https://player.vimeo.com/video/{{ block.settings.custom_right_video_url.id }}?autoplay=1&mute=1&loop=1"
+                      allow="autoplay; encrypted-media"
+                      loading="lazy"
+                    ></iframe>
+                  {%- endif -%}
+                {%- else -%}
+                  {{ 'hero-apparel-1' | placeholder_svg_tag: 'custom-right-media placeholder-svg' }}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- else -%}
+          {%- comment -%} Default Layout {%- endcomment -%}
           <div class="slideshow__media banner__media media{% if block.settings.image == blank %} placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}">
             {%- if block.settings.image -%}
               {%- liquid
@@ -435,6 +683,7 @@
               {%- endif -%}
             </div>
           </div>
+        {%- endif -%}
         {%- endif -%}
       </div>
     {%- endfor -%}
@@ -611,6 +860,17 @@
       ],
       "default": "none",
       "label": "t:sections.all.animation.image_behavior.label"
+    },
+    {
+      "type": "header",
+      "content": "Custom Slideshow Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_layout",
+      "label": "Enable Custom Slideshow Layout",
+      "default": false,
+      "info": "When enabled, slides will use custom 42%/58% split layout with additional settings"
     },
     {
       "type": "header",
@@ -837,6 +1097,286 @@
           "id": "color_scheme",
           "label": "t:sections.all.colors.label",
           "default": "scheme-1"
+        },
+        {
+          "type": "header",
+          "content": "Custom Layout Settings",
+          "info": "These settings are used when 'Enable Custom Slideshow Layout' is enabled in section settings"
+        },
+        {
+          "type": "header",
+          "content": "Left Content - Text"
+        },
+        {
+          "type": "text",
+          "id": "custom_txt_1",
+          "label": "Small Text (txt-1)",
+          "default": "New - Spring Revival Collection"
+        },
+        {
+          "type": "color",
+          "id": "custom_txt_1_color",
+          "label": "Small Text Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "custom_txt_1_size",
+          "min": 8,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "label": "Small Text Font Size",
+          "default": 10
+        },
+        {
+          "type": "text",
+          "id": "custom_txt_2",
+          "label": "Heading Text (txt-2)",
+          "default": "Barrier Repair Starts Here"
+        },
+        {
+          "type": "color",
+          "id": "custom_txt_2_color",
+          "label": "Heading Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "custom_txt_2_size",
+          "min": 20,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "Heading Font Size",
+          "default": 50
+        },
+        {
+          "type": "textarea",
+          "id": "custom_txt_3",
+          "label": "Description Text (txt-3)",
+          "default": "Science-backed actives meet clean botanicals. Our patented Medayssinian Lipid Complex rebuilds your skin barrier from the inside out."
+        },
+        {
+          "type": "color",
+          "id": "custom_txt_3_color",
+          "label": "Description Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "custom_txt_3_size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Description Font Size",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Left Content - Buttons"
+        },
+        {
+          "type": "header",
+          "content": "Left Button"
+        },
+        {
+          "type": "text",
+          "id": "custom_left_button_text",
+          "label": "Button Text",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "url",
+          "id": "custom_left_button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "custom_left_button_bg",
+          "label": "Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "custom_left_button_text_color",
+          "label": "Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "custom_left_button_border",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Border Width",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "custom_left_button_border_color",
+          "label": "Border Color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Right Button"
+        },
+        {
+          "type": "text",
+          "id": "custom_right_button_text",
+          "label": "Button Text",
+          "default": "FIND MY ROUTINE"
+        },
+        {
+          "type": "url",
+          "id": "custom_right_button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "custom_right_button_bg",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "custom_right_button_text_color",
+          "label": "Text Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "custom_right_button_border",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Border Width",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "custom_right_button_border_color",
+          "label": "Border Color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Left Content - Rating"
+        },
+        {
+          "type": "header",
+          "content": "Stars"
+        },
+        {
+          "type": "color",
+          "id": "custom_star_color",
+          "label": "Star Fill Color",
+          "default": "#FFAA00"
+        },
+        {
+          "type": "range",
+          "id": "custom_star_width",
+          "min": 10,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Star Width",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "custom_star_height",
+          "min": 10,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Star Height",
+          "default": 24
+        },
+        {
+          "type": "header",
+          "content": "Rating Text"
+        },
+        {
+          "type": "text",
+          "id": "custom_rating_text",
+          "label": "Rating Text",
+          "default": "Join 100,000+ Happy Customers"
+        },
+        {
+          "type": "color",
+          "id": "custom_rating_text_color",
+          "label": "Rating Text Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "custom_rating_text_size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Rating Text Font Size",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Left Content - Icons"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_1",
+          "label": "Icon 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_2",
+          "label": "Icon 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_3",
+          "label": "Icon 3"
+        },
+        {
+          "type": "header",
+          "content": "Right Content - Media"
+        },
+        {
+          "type": "select",
+          "id": "custom_media_type",
+          "label": "Media Type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "image"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_right_image",
+          "label": "Right Side Image"
+        },
+        {
+          "type": "video",
+          "id": "custom_right_video",
+          "label": "Right Side Video"
+        },
+        {
+          "type": "video_url",
+          "id": "custom_right_video_url",
+          "label": "Right Side Video URL",
+          "accept": ["youtube", "vimeo"]
         },
         {
           "type": "header",
