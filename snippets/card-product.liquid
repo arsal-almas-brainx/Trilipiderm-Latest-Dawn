@@ -27,6 +27,9 @@
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+  {%- if settings.enable_custom_card_style -%}
+    {{ 'custom-card.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
 {%- endunless -%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
@@ -39,8 +42,60 @@
     if ratio == 0 or ratio == null
       assign ratio = 1
     endif
+    
+    # Get product description metafield
+    assign product_description = card_product.metafields.custom.short_description
+    if product_description == blank
+      assign product_description = card_product.description | strip_html | truncate: 80
+    endif
+    
+    # Get custom image badge from settings
+    assign image_badge = settings.custom_card_image_badge
+    if image_badge == blank
+      assign image_badge = 'BEST SELLERS'
+    endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover">
+  
+  {%- if settings.enable_custom_card_style -%}
+    <!-- Custom Card Design -->
+    <div class="card-wrapper product-card-wrapper underline-links-hover">
+      <div class="custom-product-card">
+        <div class="custom-image-container">
+          {%- if image_badge != '' -%}
+            <span class="custom-product-badge">{{ image_badge }}</span>
+          {%- endif -%}
+          {%- if card_product.featured_media -%}
+            <img 
+              class="custom-card-image" 
+              src="{{ card_product.featured_media | image_url: width: 498 }}" 
+              alt="{{ card_product.featured_media.alt | escape }}"
+              loading="lazy"
+              width="249"
+              height="234"
+            >
+          {%- else -%}
+            {{ 'product-apparel-2' | placeholder_svg_tag: 'custom-card-image' }}
+          {%- endif -%}
+        </div>
+        <div class="custom-text-container">
+          <p class="custom-badge-text">{{ settings.custom_card_badge_text }}</p>
+          <h5 class="custom-title">{{ card_product.title | escape }}</h5>
+          <p class="custom-description">{{ product_description }}</p>
+          <div class="custom-btn-price-container">
+            <div class="custom-price-container">
+              {%- if card_product.compare_at_price > card_product.price -%}
+                <p class="custom-price-cut">{{ card_product.compare_at_price | money }}</p>
+              {%- endif -%}
+              <p class="custom-price-actual">{{ card_product.price | money }}</p>
+            </div>
+            <button class="custom-add-button" onclick="window.location.href='{{ card_product.url }}'">ADD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- else -%}
+    <!-- Standard Card Design -->
+    <div class="card-wrapper product-card-wrapper underline-links-hover">
     <div
       class="
         card card--{{ settings.card_style }}
@@ -568,6 +623,7 @@
       </div>
     </div>
   </div>
+  {%- endif -%}
 {%- else -%}
   {%- liquid
     assign ratio = 1

@@ -132,13 +132,127 @@
       "type": "icon-slider",
       "name": "Icon Slider",
       "settings": {
-        "background_color": "#1B2D4F",
-        "text_color": "#FFFFFF",
+        "background_color": "#1b2d4f",
+        "text_color": "#ffffff",
         "font_size": 14,
         "text_1": "Clinically-Driven Skincare",
         "text_2": "Eco-Friendly Commitment",
         "text_3": "100K+ Trust Us",
         "text_4": "Cruelty Free"
+      }
+    },
+    "tile_slider_ni3bkU": {
+      "type": "tile-slider",
+      "blocks": {
+        "svg_tile_7ypfUx": {
+          "type": "svg_tile",
+          "settings": {
+            "text": "VIEW ALL",
+            "link": "shopify://collections",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_DePjrj": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6.png",
+            "text": "THE GLOW EDIT",
+            "link": "shopify://collections/the-glow-edit",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_Cbawan": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_5.png",
+            "text": "FACE CARE",
+            "link": "shopify://collections/face-hydrating-restorative-skincare",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_CNjzDB": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_1.png",
+            "text": "BODY CARE",
+            "link": "shopify://collections/moisturizers",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_dJjkhr": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_2.png",
+            "text": "ANTI AGING",
+            "link": "shopify://collections/anti-aging-age-defying-skincare",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_qrh4h8": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_3.png",
+            "text": "ACNE THERAPY",
+            "link": "shopify://collections/acne-therapy-natural-clarifying-skincare",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_ei9FMt": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_4.png",
+            "text": "SPF PRODUCTS",
+            "link": "shopify://collections/the-glow-edit",
+            "font_weight": "600"
+          }
+        },
+        "image_tile_3aDwgK": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_5.png",
+            "text": "SKIN RITUALS",
+            "link": "shopify://collections/skin-rituals-gift-sets",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_fimK88": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_5.png",
+            "text": "BEST SELLERS",
+            "link": "shopify://collections/best-sellers",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_q739NL": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6.png",
+            "text": "SALE",
+            "link": "shopify://collections/the-glow-edit",
+            "font_weight": "600"
+          }
+        }
+      },
+      "block_order": [
+        "svg_tile_7ypfUx",
+        "image_tile_DePjrj",
+        "image_tile_Cbawan",
+        "image_tile_CNjzDB",
+        "image_tile_dJjkhr",
+        "image_tile_qrh4h8",
+        "image_tile_ei9FMt",
+        "image_tile_3aDwgK",
+        "image_tile_fimK88",
+        "image_tile_q739NL"
+      ],
+      "name": "Tile Slider",
+      "settings": {
+        "background_color": "#FAF6F0",
+        "text_color": "#1a1a1a",
+        "font_size": 14,
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "featured_collection": {
@@ -173,6 +287,7 @@
   "order": [
     "slideshow_z6cMWz",
     "icon_slider_gPmijt",
+    "tile_slider_ni3bkU",
     "featured_collection"
   ]
 }

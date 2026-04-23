@@ -3320,6 +3320,36 @@ details-disclosure>details {
     animation-delay: calc(var(--animation-order) * 75ms);
   }
 
+  /* Remove margin when custom card style is enabled */
+  body:has(.custom-product-card) .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in {
+    margin: 0;
+  }
+
+  body:has(.custom-product-card) .collection__title.title-wrapper {
+    margin-left: 40px;
+  }
+
+  /* Make slider component full width when custom cards are enabled */
+  body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Make the grid container full width */
+  body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid {
+    width: 100% !important;
+    padding: 0 9rem !important;
+  }
+
+  /* Override grid item widths for full-width layout */
+  body:has(.custom-product-card) .grid--5-col-desktop .grid__item {
+    width: 240px !important;
+    max-width: 240px !important;
+    flex: 0 0 240px !important;
+  }
+
   .scroll-trigger.scroll-trigger--design-mode.animate--fade-in,
   .scroll-trigger.scroll-trigger--design-mode.animate--slide-in,
   .scroll-trigger.scroll-trigger--design-mode .slider,

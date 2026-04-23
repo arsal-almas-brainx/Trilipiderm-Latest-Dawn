@@ -614,8 +614,33 @@
         "max": 40,
         "step": 5,
         "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
+        "label": "t:settings_schema.cards.settings.shadow.blur.label",
         "default": 0
+      },
+      {
+        "type": "paragraph",
+        "content": "Custom Card Style"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_custom_card_style",
+        "label": "Enable Custom Card Style",
+        "default": false,
+        "info": "Toggle to use custom card design for all product cards"
+      },
+      {
+        "type": "text",
+        "id": "custom_card_badge_text",
+        "label": "Custom Card Badge Text",
+        "default": "CRUELTY FREE CERTIFIED",
+        "info": "Text that appears on all custom product cards"
+      },
+      {
+        "type": "text",
+        "id": "custom_card_image_badge",
+        "label": "Custom Card Image Badge",
+        "default": "BEST SELLERS",
+        "info": "Badge text that appears on product images"
       }
     ]
   },
