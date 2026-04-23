@@ -3345,9 +3345,70 @@ details-disclosure>details {
 
   /* Override grid item widths for full-width layout */
   body:has(.custom-product-card) .grid--5-col-desktop .grid__item {
-    width: 240px !important;
-    max-width: 240px !important;
-    flex: 0 0 240px !important;
+    width: 249px !important;
+    max-width: 249px !important;
+    flex: 0 0 249px !important;
+  }
+
+  /* Horizontal scroll for desktop when cards exceed screen width */
+  body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4A7FA5 #DBDBDB;
+    -ms-overflow-style: none;
+    padding: 0 6%;
+  }
+
+  body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid::-webkit-scrollbar {
+    display: block;
+    height: 2px;
+  }
+
+  body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid::-webkit-scrollbar-track {
+    background: #DBDBDB;
+    border-radius: 1px;
+  }
+
+  body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid::-webkit-scrollbar-thumb {
+    background: #4A7FA5;
+    border-radius: 1px;
+  }
+
+  /* Mobile scrolling for custom cards in featured collection */
+  @media screen and (max-width: 767px) {
+    body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid {
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #4A7FA5 #DBDBDB;
+      -ms-overflow-style: none;
+      padding: 0 6%;
+      gap: 16px;
+      width: 100%;
+      padding-bottom: 7%;
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid .grid__item {
+      flex: 0 0 249px;
+      min-width: 249px;
+    }
+
+    body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid::-webkit-scrollbar {
+      display: block;
+      height: 2px;
+    }
+
+    body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid::-webkit-scrollbar-track {
+      background: #DBDBDB;
+      border-radius: 1px;
+      margin: 0 6%;
+    }
+
+    body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid::-webkit-scrollbar-thumb {
+      background: #4A7FA5;
+      border-radius: 1px;
+    }
   }
 
   .scroll-trigger.scroll-trigger--design-mode.animate--fade-in,
