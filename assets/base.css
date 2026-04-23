@@ -3356,13 +3356,15 @@ details-disclosure>details {
     scrollbar-width: thin;
     scrollbar-color: #4A7FA5 #DBDBDB;
     -ms-overflow-style: none;
-    padding: 0 6%;
+    padding: 0 9rem;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid {
-      width: 100% !important;
-      padding: 0 2rem !important;
+  @media screen and (max-width: 767px) {
+    @media (prefers-reduced-motion: no-preference) {
+      body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid {
+        width: 100% !important;
+        padding: 0 2rem !important;
+      }
     }
   }
 

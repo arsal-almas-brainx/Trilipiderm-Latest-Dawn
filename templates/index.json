@@ -258,9 +258,9 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "collection": "all",
+        "collection": "best-sellers",
         "products_to_show": 5,
-        "title": "Featured products",
+        "title": "OUR BEST SELLERS",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -279,6 +279,9 @@
         "quick_add": "none",
         "columns_mobile": "2",
         "swipe_on_mobile": false,
+        "enable_best_sellers": true,
+        "best_sellers_text": "MOST LOVED",
+        "view_all_text": "SHOP ALL PRODUCTS",
         "padding_top": 44,
         "padding_bottom": 36
       }
