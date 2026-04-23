@@ -36,6 +36,58 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .best-sellers-badge {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4A7FA5;
+    margin-bottom: 8px;
+  }
+
+  .collection__title .title:not(:only-child) {
+    margin-top: 8px;
+  }
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .title-container {
+      width: 113%;
+    }
+  }
+
+  .best-sellers-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  @media screen and (min-width: 750px) {
+    .best-sellers-title {
+      font-size: 36px;
+      font-weight: 700;
+    }
+  }
+
+  .view-all-link {
+    color: #1a1a1a;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid #1a1a1a;
+    letter-spacing: 0;
+    white-space: nowrap;
+    padding-bottom: 2px;
+  }
+
+  .view-all-link:hover {
+    border-bottom: 1px solid #1a1a1a;
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -73,10 +125,22 @@
     data-id="{{ section.id }}"
   >
     <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
+      {%- if section.settings.enable_best_sellers and section.settings.best_sellers_text != blank -%}
+        <div class="best-sellers-badge{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.best_sellers_text }}
+        </div>
+      {%- endif -%}
       {%- if section.settings.title != blank -%}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ section.settings.title }}
-        </h2>
+        <div class="title-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if section.settings.enable_best_sellers %} best-sellers-title{% endif %}">
+            {{ section.settings.title }}
+          </h2>
+          {%- if section.settings.enable_best_sellers and section.settings.view_all_text != blank -%}
+            <a href="{{ section.settings.collection.url }}" class="view-all-link">
+              {{ section.settings.view_all_text }} →
+            </a>
+          {%- endif -%}
+        </div>
       {%- endif -%}
       {%- if section.settings.description != blank
         or section.settings.show_description
@@ -197,18 +261,7 @@
       {%- endif -%}
     </slider-component>
 
-    {%- if section.settings.show_view_all and more_in_collection -%}
-      <div class="center collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        <a
-          href="{{ section.settings.collection.url }}"
-          class="{% if section.settings.view_all_style == 'link' %}link underlined-link{% elsif section.settings.view_all_style == 'solid' %}button{% else %}button button--secondary{% endif %}"
-          aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title | escape }}"
-        >
-          {{ 'sections.featured_collection.view_all' | t }}
-        </a>
-      </div>
-    {%- endif -%}
-    {% if section.settings.image_shape == 'arch' %}
+        {% if section.settings.image_shape == 'arch' %}
       {{ 'mask-arch.svg' | inline_asset_content }}
     {%- endif -%}
   </div>
@@ -494,6 +547,30 @@
       "default": false,
       "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
     },          
+    {
+      "type": "header",
+      "content": "Best Sellers"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_best_sellers",
+      "label": "Enable Best Sellers",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "best_sellers_text",
+      "label": "Best Sellers Text",
+      "default": "BEST SELLERS",
+      "info": "Text that appears above the heading"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Text",
+      "default": "View All",
+      "info": "Text for the View All link"
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
