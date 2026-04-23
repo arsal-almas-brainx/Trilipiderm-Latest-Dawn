@@ -1,0 +1,325 @@
+{%- style -%}
+  .tile-slider-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+  }
+
+  .row-tiles-{{ section.id }} {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 36px;
+    padding: 0 6%;
+    cursor: default;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 93%;
+  }
+
+  .row-tiles-{{ section.id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .row-tiles-{{ section.id }}.dragging {
+    cursor: pointer;
+  }
+
+  .tile-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .tile-{{ section.id }} .image-container-{{ section.id }} {
+    height: 90px;
+  }
+
+  .tile-{{ section.id }} .image-container-{{ section.id }} svg {
+    border: 1px solid #AAAAAA;
+    display: block;
+  }
+
+  .tile-{{ section.id }} .tile-image-{{ section.id }} {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .tile-{{ section.id }} .tile-text-{{ section.id }} {
+    text-align: center;
+    font-size: {{ section.settings.font_size }}px;
+    color: {{ section.settings.text_color }};
+    margin-top: 8px;
+    margin-bottom: 0;
+    letter-spacing: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .row-tiles-{{ section.id }} {
+      scrollbar-width: thin;
+      scrollbar-color: #4A7FA5 #DBDBDB;
+      -ms-overflow-style: none;
+      padding: 0 6%;
+    }
+
+    .row-tiles-{{ section.id }}::-webkit-scrollbar {
+      display: block;
+      height: 1px;
+    }
+
+    .row-tiles-{{ section.id }}::-webkit-scrollbar-track {
+      background: #DBDBDB;
+      border-radius: 2px;
+      margin: 0 6%;
+    }
+
+    .row-tiles-{{ section.id }}::-webkit-scrollbar-thumb {
+      background: #4A7FA5;
+      border-radius: 2px;
+    }
+    .row-tiles-{{ section.id }} {
+      gap: 16px;
+      width: 100%;
+      padding-bottom: 7%;
+    }
+  }
+{%- endstyle -%}
+
+<div class="tile-slider-section-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="row-tiles-{{ section.id }}" id="tile-slider-{{ section.id }}">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'svg_tile' -%}
+        <a class="tile-{{ section.id }}" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          <div class="image-container-{{ section.id }}">
+            <svg width="94" height="90" viewBox="0 0 94 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M46.0558 49.839C46.0558 48.9506 45.7142 48.099 45.1054 47.4718C44.4973 46.8438 43.6724 46.4909 42.8122 46.4907H35.2437C34.383 46.4907 33.558 46.8434 32.9504 47.4718C32.342 48.0996 32.0002 48.9511 32 49.839V57.6517C32 58.5401 32.3417 59.3917 32.9504 60.019C33.5586 60.6469 34.3835 60.9998 35.2437 61H42.8122C43.6728 61 44.4978 60.6473 45.1054 60.019C45.7138 59.3912 46.0557 58.5397 46.0558 57.6517V49.839ZM62.2741 49.839C62.2741 48.9506 61.9324 48.099 61.3237 47.4718C60.7156 46.8438 59.8907 46.4909 59.0305 46.4907H51.4619C50.6013 46.4907 49.7763 46.8434 49.1687 47.4718C48.5603 48.0996 48.2185 48.9511 48.2183 49.839V57.6517C48.2183 58.5401 48.5599 59.3917 49.1687 60.019C49.7768 60.6469 50.6017 60.9998 51.4619 61H59.0305C59.8911 61 60.7161 60.6473 61.3237 60.019C61.9321 59.3912 62.2739 58.5397 62.2741 57.6517V49.839ZM43.8934 49.839V57.6517C43.8938 57.7984 43.8662 57.9437 43.812 58.0793C43.7578 58.215 43.6782 58.3382 43.5777 58.4419C43.4772 58.5456 43.3578 58.6278 43.2265 58.6838C43.0951 58.7397 42.9543 58.7682 42.8122 58.7678H35.2437C35.1015 58.7682 34.9608 58.7397 34.8294 58.6838C34.698 58.6278 34.5786 58.5456 34.4782 58.4419C34.3777 58.3382 34.2981 58.215 34.2439 58.0793C34.1897 57.9437 34.162 57.7984 34.1624 57.6517V49.839C34.162 49.6923 34.1897 49.547 34.2439 49.4114C34.2981 49.2758 34.3777 49.1526 34.4782 49.0489C34.5786 48.9451 34.698 48.8629 34.8294 48.807C34.9608 48.7511 35.1015 48.7225 35.2437 48.7229H42.8122C42.9543 48.7225 43.0951 48.7511 43.2265 48.807C43.3578 48.8629 43.4772 48.9451 43.5777 49.0489C43.6782 49.1526 43.7578 49.2758 43.812 49.4114C43.8662 49.547 43.8938 49.6923 43.8934 49.839ZM60.1117 49.839V57.6517C60.1121 57.7984 60.0844 57.9437 60.0302 58.0793C59.9761 58.215 59.8964 58.3382 59.796 58.4419C59.6955 58.5456 59.5761 58.6278 59.4447 58.6838C59.3134 58.7397 59.1726 58.7682 59.0305 58.7678H51.4619C51.3198 58.7682 51.179 58.7397 51.0477 58.6838C50.9163 58.6278 50.7969 58.5456 50.6964 58.4419C50.596 58.3382 50.5163 58.215 50.4621 58.0793C50.408 57.9437 50.3803 57.7984 50.3807 57.6517V49.839C50.3803 49.6923 50.408 49.547 50.4621 49.4114C50.5163 49.2758 50.596 49.1526 50.6964 49.0489C50.7969 48.9451 50.9163 48.8629 51.0477 48.807C51.179 48.7511 51.3198 48.7225 51.4619 48.7229H59.0305C59.1726 48.7225 59.3134 48.7511 59.4447 48.807C59.5761 48.8629 59.6955 48.9451 59.796 49.0489C59.8964 49.1526 59.9761 49.2758 60.0302 49.4114C60.0844 49.547 60.1121 49.6923 60.1117 49.839ZM57.5395 44.0275L62.0503 39.3712C62.6584 38.7433 63 37.8918 63 37.0039C63 36.1161 62.6584 35.2646 62.0503 34.6367L57.5395 29.9803C56.9312 29.3526 56.1063 29 55.2462 29C54.3861 29 53.5612 29.3526 52.9529 29.9803L48.4421 34.6367C47.834 35.2646 47.4924 36.1161 47.4924 37.0039C47.4924 37.8918 47.834 38.7433 48.4421 39.3712L52.9529 44.0275C53.5612 44.6552 54.3861 45.0079 55.2462 45.0079C56.1063 45.0079 56.9312 44.6552 57.5395 44.0275ZM46.0558 33.0976C46.0558 32.2092 45.7142 31.3576 45.1054 30.7304C44.4973 30.1024 43.6724 29.7495 42.8122 29.7493H35.2437C34.383 29.7493 33.558 30.102 32.9504 30.7304C32.342 31.3581 32.0002 32.2096 32 33.0976V40.9103C32 41.7987 32.3417 42.6503 32.9504 43.2775C33.5586 43.9055 34.3835 44.2584 35.2437 44.2586H42.8122C43.6728 44.2586 44.4978 43.9059 45.1054 43.2775C45.7138 42.6497 46.0557 41.7982 46.0558 40.9103V33.0976ZM60.5215 37.793L56.0106 42.4494C55.8079 42.6586 55.5329 42.7761 55.2462 42.7761C54.9595 42.7761 54.6845 42.6586 54.4818 42.4494L49.9709 37.793C49.7682 37.5837 49.6544 37.2999 49.6544 37.0039C49.6544 36.708 49.7682 36.4241 49.9709 36.2148L54.4818 31.5585C54.6845 31.3493 54.9595 31.2317 55.2462 31.2317C55.5329 31.2317 55.8079 31.3493 56.0106 31.5585L60.5215 36.2148C60.7242 36.4241 60.838 36.708 60.838 37.0039C60.838 37.2999 60.7242 37.5837 60.5215 37.793ZM43.8934 33.0976V40.9103C43.8938 41.057 43.8662 41.2023 43.812 41.3379C43.7578 41.4735 43.6782 41.5967 43.5777 41.7004C43.4772 41.8042 43.3578 41.8864 43.2265 41.9423C43.0951 41.9982 42.9543 42.0268 42.8122 42.0264H35.2437C35.1015 42.0268 34.9608 41.9982 34.8294 41.9423C34.698 41.8864 34.5786 41.8042 34.4782 41.7004C34.3777 41.5967 34.2981 41.4735 34.2439 41.3379C34.1897 41.2023 34.162 41.057 34.1624 40.9103V33.0976C34.162 32.9509 34.1897 32.8056 34.2439 32.67C34.2981 32.5343 34.3777 32.4111 34.4782 32.3074C34.5786 32.2037 34.698 32.1215 34.8294 32.0656C34.9608 32.0096 35.1015 31.9811 35.2437 31.9815H42.8122C42.9543 31.9811 43.0951 32.0096 43.2265 32.0656C43.3578 32.1215 43.4772 32.2037 43.5777 32.3074C43.6782 32.4111 43.7578 32.5343 43.812 32.67C43.8662 32.8056 43.8938 32.9509 43.8934 33.0976Z"
+                fill="#707070" />
+              <rect x="0.5" y="0.5" width="93" height="89" stroke="#AAAAAA" />
+            </svg>
+          </div>
+          <p class="tile-text-{{ section.id }}" style="font-weight: {{ block.settings.font_weight }};">
+            {{ block.settings.text }}
+          </p>
+        </a>
+      {%- elsif block.type == 'image_tile' -%}
+        <a class="tile-{{ section.id }}" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          <div class="image-container-{{ section.id }}">
+            {%- if block.settings.image != blank -%}
+              <img
+                class="tile-image-{{ section.id }}"
+                src="{{ block.settings.image | image_url: width: 214 }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                width="107"
+                height="90"
+                loading="lazy"
+                draggable="false"
+              >
+            {%- else -%}
+              {%- assign placeholder_class = 'tile-image-' | append: section.id -%}
+              {{ 'image' | placeholder_svg_tag: placeholder_class }}
+            {%- endif -%}
+          </div>
+          <p class="tile-text-{{ section.id }}" style="font-weight: {{ block.settings.font_weight }};">
+            {{ block.settings.text }}
+          </p>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    const slider = document.getElementById('tile-slider-{{ section.id }}');
+    if (!slider) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let hasMoved = false;
+
+    slider.addEventListener('mousedown', function (e) {
+      isDown = true;
+      hasMoved = false;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+      e.preventDefault();
+    });
+
+    slider.addEventListener('mouseleave', function () {
+      isDown = false;
+    });
+
+    slider.addEventListener('mouseup', function () {
+      isDown = false;
+    });
+
+    slider.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 5) {
+        hasMoved = true;
+      }
+      slider.scrollLeft = scrollLeft - walk;
+    });
+
+    // Prevent link click after drag
+    slider.addEventListener(
+      'click',
+      function (e) {
+        if (hasMoved) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true
+    );
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Tile Slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAF6F0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "svg_tile",
+      "name": "SVG Tile (View All)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "VIEW ALL"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "options": [
+            { "value": "300", "label": "Light" },
+            { "value": "400", "label": "Normal" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "400"
+        }
+      ]
+    },
+    {
+      "type": "image_tile",
+      "name": "Image Tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "THE GLOW EDIT"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "options": [
+            { "value": "300", "label": "Light" },
+            { "value": "400", "label": "Normal" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "400"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tile Slider",
+      "blocks": [
+        {
+          "type": "svg_tile",
+          "settings": {
+            "text": "VIEW ALL",
+            "link": ""
+          }
+        },
+        {
+          "type": "image_tile",
+          "settings": {
+            "text": "THE GLOW EDIT"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
