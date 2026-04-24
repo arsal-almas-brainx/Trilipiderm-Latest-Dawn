@@ -1,0 +1,253 @@
+/* Routine Set Bundles Styles */
+
+/* Title container with collection boxes */
+.routine-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E8E2DA;
+}
+
+@media screen and (min-width: 750px) {
+  .routine-title-container {
+    width: 113%;
+  }
+}
+
+.routine-title-container .routine-heading {
+  font-size: 22px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .routine-title-container .routine-heading {
+    font-size: 36px;
+    font-weight: 700;
+  }
+}
+
+/* Collection boxes container */
+.routine-collection-boxes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  direction: rtl;
+}
+
+.routine-collection-boxes::-webkit-scrollbar {
+  display: none;
+}
+
+.routine-collection-boxes .collection-box {
+  direction: ltr;
+  padding: 8px 20px;
+  border: 1px solid #1A1A1A;
+  background: transparent;
+  color: #1A1A1A;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.routine-collection-boxes .collection-box:hover {
+  background: #4A7FA5;
+  color: #fff;
+}
+
+.routine-collection-boxes .collection-box.active {
+  background: #4A7FA5;
+  color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .routine-collection-boxes .collection-box {
+    padding: 6px 13px;
+  }
+}
+
+/* Routine bundles container - flex layout with fixed image and scrolling cards */
+.routine-bundles-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Bundle image card - fixed position */
+.routine-bundle-image-card {
+  position: relative;
+  width: 249px;
+  height: 400px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid #E8E2DA;
+  border-right: none;
+  z-index: 1;
+}
+
+.routine-bundle-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.routine-bundle-image-card .bundle-image-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: 20px;
+  color: #fff;
+  z-index: 2;
+}
+
+.routine-bundle-image-card .bundle-image-text .text-line-1 {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 37px;
+}
+
+.routine-bundle-image-card .bundle-image-text .text-line-2 {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  margin: 0;
+  line-height: 27px;
+  margin-top: 2%;
+  width: 80%;
+}
+
+@media screen and (max-width: 767px) {
+  .routine-title-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .routine-bundles-wrapper {
+    overflow-x: auto;
+  }
+  
+  .routine-bundles-container {
+    flex-direction: column;
+  }
+  
+  .routine-bundle-image-card {
+    display: none;
+  }
+  
+  .routine-bundles-slider {
+    overflow-x: auto;
+    padding-bottom: 20px !important;
+  }
+  
+  .routine-bundles-grid {
+    gap: 12px;
+  }
+  
+  .routine-bundles-grid .grid__item {
+    width: calc(50% - 6px);
+  }
+  
+  .routine-bundles-grid .grid__item .card-wrapper {
+    height: auto;
+  }
+  
+  .routine-bundles-grid .grid__item .card {
+    height: auto;
+    border: 1px solid #E8E2DA;
+  }
+  
+  .routine-bundles-grid .grid__item:last-child .card {
+    border-right: 1px solid #E8E2DA;
+  }
+}
+
+/* Routine bundles product slider - only product cards scroll */
+.routine-bundles-slider {
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex: 1;
+  padding-bottom: 60px !important;
+  scrollbar-width: thin;
+  scrollbar-color: #4A7FA5 #E8E2DA;
+}
+
+.routine-bundles-slider::-webkit-scrollbar {
+  height: 10px;
+}
+
+.routine-bundles-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+.routine-bundles-grid .grid__item {
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  width: 249px;
+}
+
+.routine-bundles-grid .grid__item .card-wrapper {
+  width: 100%;
+  height: 400px;
+}
+
+.routine-bundles-grid .grid__item .card {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #E8E2DA;
+  border-right: none;
+}
+
+.routine-bundles-grid .grid__item:last-child .card {
+  border-right: 1px solid #E8E2DA;
+}
+
+/* Routine bundles wrapper */
+.routine-bundles-wrapper {
+  margin: 0 0 0% 6%;
+}
+
+/* Collection products container - hidden by default, shown when box is active */
+.routine-collection-products {
+  display: none !important;
+}
+
+.routine-collection-products.active {
+  display: block !important;
+}
+
+/* Badge for routine bundles */
+.routine-bundles-badge {
+  font-size: 14px;
+  font-weight: 700;
+  color: #4A7FA5;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+@media screen and (max-width: 767px) {
+  .routine-bundles-badge {
+    font-size: 12px;
+  }
+}
