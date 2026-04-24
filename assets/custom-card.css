@@ -134,6 +134,28 @@ body:has(.custom-product-card) .grid--5-col-desktop .grid__item:last-child .cust
   letter-spacing: 1px;        
 }
 
+.custom-product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.custom-product-card-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.custom-product-card-link:hover .custom-title,
+.custom-product-card-link:hover .custom-description,
+.custom-product-card-link:hover .custom-badge-text,
+.custom-product-card-link:hover .custom-price-actual {
+  text-decoration: none !important;
+}
+
+.custom-product-card-link:hover .custom-price-cut {
+  text-decoration: line-through !important;
+}
+
 /* Ensure grid items work properly with custom cards */
 body:has(.custom-product-card) .grid__item {
   display: flex;
