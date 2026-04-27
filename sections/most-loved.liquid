@@ -1,0 +1,207 @@
+{{ 'most-loved.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="most-loved-section section-{{ section.id }}-padding{% if section.settings.background_image != blank %} most-loved-has-bg{% endif %}"
+  {% if section.settings.background_image != blank %}
+    style="background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}');"
+  {% endif %}
+>
+  <div class="most-loved-container">
+    {%- if section.settings.heading != blank -%}
+      <p class="txt-1">{{ section.settings.heading }}</p>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <h3 class="txt-2">{{ section.settings.subheading }}</h3>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="columns-blocks-container">
+        {%- for block in section.blocks -%}
+          <div class="column-block" {{ block.shopify_attributes }}>
+            {%- if block.settings.logo != blank -%}
+              <div class="image-container-logo">
+                <img class="block-image-logo" src="{{ block.settings.logo | image_url: width: 116 }}" alt="{{ block.settings.logo.alt | escape }}" loading="lazy" width="58" height="58">
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.big_text != blank -%}
+              <h3 class="column-big-text">{{ block.settings.big_text }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.small_text != blank -%}
+              <p class="column-small-text">{{ block.settings.small_text }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.image != blank -%}
+              <div class="image-container">
+                <img class="block-image" src="{{ block.settings.image | image_url: width: block.settings.image_width }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy" width="{{ block.settings.image_width }}" height="{{ block.settings.image_height }}">
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.bottom_text != blank -%}
+              <p class="column-bottom-text">{{ block.settings.bottom_text }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Most Loved",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "MOST LOVED"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Clinically Loved by thousands"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "big_text",
+          "label": "Big text",
+          "default": "1200+"
+        },
+        {
+          "type": "text",
+          "id": "small_text",
+          "label": "Small text",
+          "default": "Creator shop listings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_width",
+          "label": "Image width (px)",
+          "default": "400"
+        },
+        {
+          "type": "text",
+          "id": "image_height",
+          "label": "Image height (px)",
+          "default": "50"
+        },
+        {
+          "type": "text",
+          "id": "bottom_text",
+          "label": "Bottom text (after image)",
+          "default": "text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Most Loved",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "big_text": "1200+",
+            "small_text": "Creator shop listings"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "big_text": "500+",
+            "small_text": "5-Star Reviews"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "big_text": "98%",
+            "small_text": "Saw visible results"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "big_text": "50+",
+            "small_text": "Awards Won"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
