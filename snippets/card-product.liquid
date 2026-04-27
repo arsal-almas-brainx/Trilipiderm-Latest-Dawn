@@ -34,7 +34,13 @@
 
 {%- if settings.enable_custom_card_style -%}
 <script>
-function addToCart(variantId, buttonElement) {
+function addToCart(variantId, buttonElement, event) {
+  // Prevent default link navigation
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  
   // Disable button and show loading state
   buttonElement.disabled = true;
   buttonElement.textContent = 'Adding...';
@@ -129,7 +135,7 @@ function addToCart(variantId, buttonElement) {
               {%- endif -%}
               <p class="custom-price-actual">{{ card_product.price | money }}</p>
             </div>
-            <button class="custom-add-button" onclick="event.stopPropagation(); addToCart({{ card_product.variants.first.id }}, this)">ADD</button>
+            <button class="custom-add-button" onclick="addToCart({{ card_product.variants.first.id }}, this, event)">ADD</button>
           </div>
         </div>
       </div>

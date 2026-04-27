@@ -18,9 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
       sectionContainers.forEach((container) => {
         if (container.dataset.collectionIndex === index) {
           container.classList.add('active');
-          const slider = container.querySelector('.routine-bundles-slider');
+          // Reset slider position
+          const slider = container.querySelector('slider-component');
           if (slider) {
-            slider.scrollLeft = 0;
+            const sliderList = slider.querySelector('.slider');
+            if (sliderList) {
+              sliderList.scrollLeft = 0;
+            }
           }
         } else {
           container.classList.remove('active');
