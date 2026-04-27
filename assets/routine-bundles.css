@@ -57,7 +57,6 @@
   font-weight: 400;
   letter-spacing: 0px;
   cursor: pointer;
-  white-space: nowrap;
   transition: all 0.3s ease;
   text-transform: uppercase;
   flex-shrink: 0;

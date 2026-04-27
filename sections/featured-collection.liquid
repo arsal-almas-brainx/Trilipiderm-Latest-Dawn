@@ -89,10 +89,22 @@
     font-size: 16px;
     font-weight: 700;
     text-decoration: none;
-    border-bottom: 1px solid #1a1a1a;
     letter-spacing: 0;
     white-space: nowrap;
     padding-bottom: 2px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .view-all-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 96%;
+    height: 1px;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
   }
 
   @media screen and (max-width: 767px) {

@@ -286,6 +286,10 @@
         "routine_bundles_badge_text": "ROUTINE SETS",
         "routine_bundle_text_1": "ROUTINE",
         "routine_bundle_text_2": "SET BUNDLES",
+        "enable_trending_section": false,
+        "trending_collection": "",
+        "trending_title": "Trending Products",
+        "trending_subheading": "",
         "padding_top": 44,
         "padding_bottom": 80
       }
@@ -370,6 +374,144 @@
         "routine_bundle_image": "shopify://shop_images/Background_Border_1.png",
         "routine_bundle_text_1": "Transform Your Skin Routine",
         "routine_bundle_text_2": "Your Skin Deserves the Best",
+        "enable_trending_section": false,
+        "trending_collection": "",
+        "trending_title": "Trending Products",
+        "trending_subheading": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_px9Wgj": {
+      "type": "featured-collection",
+      "blocks": {
+        "collection_box_bdz83X": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "FACE",
+            "box_collection": ""
+          }
+        },
+        "collection_box_NFMLgL": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "BODY",
+            "box_collection": ""
+          }
+        },
+        "collection_box_dmERHU": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "LIPS",
+            "box_collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_box_bdz83X",
+        "collection_box_NFMLgL",
+        "collection_box_dmERHU"
+      ],
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "",
+        "products_to_show": 5,
+        "title": "#Trending on TIKTOK",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 5,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "enable_best_sellers": false,
+        "best_sellers_text": "BEST SELLERS",
+        "view_all_text": "View All",
+        "enable_routine_set_bundles": false,
+        "routine_bundles_badge_text": "ROUTINE SETS",
+        "routine_bundle_text_1": "ROUTINE",
+        "routine_bundle_text_2": "SET BUNDLES",
+        "enable_trending_section": true,
+        "trending_image": "shopify://shop_images/tik_tok_post.jpg",
+        "trending_collection": "beauty-botanical-clinical-skincare-essentials",
+        "trending_title": "#Trending on TIKTOK",
+        "trending_subheading": "See what influencers are loving right now.",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "most_loved_AEHWbn": {
+      "type": "most-loved",
+      "blocks": {
+        "column_ULtbnH": {
+          "type": "column",
+          "settings": {
+            "logo": "shopify://shop_images/Group_1000006161.png",
+            "big_text": "5.0",
+            "small_text": "Shop App Ratings Highly rated by users who’ve seen real results",
+            "image_width": "400",
+            "image_height": "50",
+            "bottom_text": ""
+          }
+        },
+        "column_3qq468": {
+          "type": "column",
+          "settings": {
+            "logo": "shopify://shop_images/Frame_cf3b082c-6259-4416-aaf1-cfce57a15962.png",
+            "big_text": "65%",
+            "small_text": "customer return rate trusted by thousands and proven through everyday use.",
+            "image_width": "400",
+            "image_height": "50",
+            "bottom_text": ""
+          }
+        },
+        "column_iXhJVc": {
+          "type": "column",
+          "settings": {
+            "logo": "shopify://shop_images/Group_1000006159.png",
+            "big_text": "40K+",
+            "small_text": "Creator trust us world wide",
+            "image": "shopify://shop_images/Group_378_1.png",
+            "image_width": "94",
+            "image_height": "42",
+            "bottom_text": ""
+          }
+        },
+        "column_TnncR4": {
+          "type": "column",
+          "settings": {
+            "logo": "shopify://shop_images/Group_1000006160.png",
+            "big_text": "1200+",
+            "small_text": "Creator shop listings",
+            "image": "shopify://shop_images/Group_383_1.png",
+            "image_width": "210",
+            "image_height": "26",
+            "bottom_text": "And Much More"
+          }
+        }
+      },
+      "block_order": [
+        "column_ULtbnH",
+        "column_3qq468",
+        "column_iXhJVc",
+        "column_TnncR4"
+      ],
+      "name": "Most Loved",
+      "settings": {
+        "background_image": "shopify://shop_images/image_1.png",
+        "heading": "MOST LOVED",
+        "subheading": "Clinically Loved by thousands",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -381,6 +523,8 @@
     "tile_slider_ni3bkU",
     "featured_collection",
     "quiz_section_nxNntK",
-    "featured_collection_G4YfAm"
+    "featured_collection_G4YfAm",
+    "featured_collection_px9Wgj",
+    "most_loved_AEHWbn"
   ]
 }

@@ -491,8 +491,7 @@ h6:empty {
   display: inline-block;
   border: none;
   box-shadow: none;
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  
   color: rgb(var(--color-link));
   background-color: transparent;
   font-size: 1.4rem;
@@ -3387,15 +3386,17 @@ details-disclosure>details {
   @media screen and (max-width: 767px) {
     body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid {
       overflow-x: auto;
+      overflow-y: hidden;
       scrollbar-width: thin;
       scrollbar-color: #4A7FA5 #DBDBDB;
       -ms-overflow-style: none;
       padding: 0;
       gap: 16px;
       width: 100%;
-      padding-bottom: 7%;
+      padding-bottom: 60px !important;
       display: flex;
       flex-wrap: nowrap;
+      align-items: stretch;
     }
 
     body:has(.custom-product-card) .collection__title.title-wrapper {
@@ -3405,6 +3406,8 @@ details-disclosure>details {
     body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid .grid__item {
       flex: 0 0 249px;
       min-width: 249px;
+      max-width: 249px;
+      height: auto;
     }
 
     body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid::-webkit-scrollbar {
