@@ -1,0 +1,123 @@
+{{ 'instagram-feed.css' | asset_url | stylesheet_tag }}
+
+<div class="instagram-feed">
+  <div class="instagram-feed__container">
+    <!-- Header -->
+    <div class="instagram-feed__header">
+      <h3 class="instagram-feed__subtitle">{{ section.settings.instagram_handle }}</h3>
+      <h2 class="instagram-feed__main-heading">{{ section.settings.main_heading }}</h2>
+    </div>
+
+    <!-- Instagram Images Grid -->
+    <div class="instagram-feed__images-container">
+      <div class="instagram-feed__images-scroll">
+        {% for block in section.blocks %}
+          {% if block.type == 'instagram_image' %}
+            <div class="instagram-image" {{ block.shopify_attributes }}>
+              {% if block.settings.image_link != blank %}
+                <a href="{{ block.settings.image_link }}" 
+                   class="instagram-image__link"
+                   {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                  {% if block.settings.image != blank %}
+                    <img src="{{ block.settings.image | image_url: width: 288 }}" 
+                         alt="{{ block.settings.image.alt | default: 'Instagram post' | escape }}"
+                         width="288"
+                         height="288"
+                         loading="lazy"
+                         class="instagram-image__img">
+                  {% else %}
+                    <div class="instagram-image__placeholder">
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {% endif %}
+                </a>
+              {% else %}
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 288 }}" 
+                       alt="{{ block.settings.image.alt | default: 'Instagram post' | escape }}"
+                       width="288"
+                       height="288"
+                       loading="lazy"
+                       class="instagram-image__img">
+                {% else %}
+                  <div class="instagram-image__placeholder">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Instagram Feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram Handle",
+      "default": "@trilipiderm",
+      "info": "Your Instagram username with @ symbol"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Follow Us on Instagram"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "instagram_image",
+      "name": "Instagram Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 288 x 288 pixels"
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image Link",
+          "info": "URL to open when image is clicked (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "label": "Open link in new tab",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Feed",
+      "blocks": [
+        {
+          "type": "instagram_image"
+        },
+        {
+          "type": "instagram_image"
+        },
+        {
+          "type": "instagram_image"
+        },
+        {
+          "type": "instagram_image"
+        },
+        {
+          "type": "instagram_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
