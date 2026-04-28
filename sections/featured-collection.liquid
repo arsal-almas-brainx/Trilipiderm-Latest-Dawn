@@ -68,7 +68,7 @@
 
   @media screen and (min-width: 750px) {
     .title-container {
-      width: 113%;
+      width: 100%;
     }
   }
 
@@ -118,6 +118,62 @@
   .view-all-link:hover {
     border-bottom: 1px solid #1a1a1a;
   }
+
+  /* Apply margins to collection title when best sellers is enabled */
+  body:has(.best-sellers-badge) .collection__title.title-wrapper:has(.best-sellers-title) {
+    margin-left: 6%;
+    margin-right: 6%;
+  }
+
+  /* Best Sellers horizontal scrolling styles */
+  @media screen and (min-width: 750px) {
+    .collection:has(.best-sellers-title) .slider-component {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: #4A7FA5 #E8E2DA;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .collection:has(.best-sellers-title) .slider-component::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      gap: 0 !important;
+      width: max-content !important;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid .grid__item {
+      flex-shrink: 0 !important;
+      width: 249px !important;
+      max-width: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid .grid__item .card-wrapper {
+      width: 100%;
+      height: 400px;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid .grid__item .card {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #E8E2DA;
+      border-right: none;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid .grid__item:last-child .card {
+      border-right: 1px solid #E8E2DA;
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -155,7 +211,7 @@
     data-id="{{ section.id }}"
   >
     {%- unless section.settings.enable_trending_section -%}
-    <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
+    <div class="collection__title title-wrapper title-wrapper--no-top-margin{% unless section.settings.enable_routine_set_bundles or section.settings.enable_best_sellers %} page-width{% endunless %}{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
       {%- if section.settings.enable_best_sellers and section.settings.best_sellers_text != blank -%}
         <div class="best-sellers-badge{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           {{ section.settings.best_sellers_text }}

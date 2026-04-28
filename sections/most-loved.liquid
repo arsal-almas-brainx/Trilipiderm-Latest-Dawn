@@ -12,9 +12,17 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  {%- if section.settings.mobile_background_image != blank -%}
+    @media screen and (max-width: 767px) {
+      .section-{{ section.id }}-mobile-bg {
+        background-image: url('{{ section.settings.mobile_background_image | image_url: width: 750 }}') !important;
+      }
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
-<div class="most-loved-section section-{{ section.id }}-padding{% if section.settings.background_image != blank %} most-loved-has-bg{% endif %}"
+<div class="most-loved-section section-{{ section.id }}-padding{% if section.settings.background_image != blank %} most-loved-has-bg{% endif %}{% if section.settings.mobile_background_image != blank %} section-{{ section.id }}-mobile-bg{% endif %}"
   {% if section.settings.background_image != blank %}
     style="background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}');"
   {% endif %}
@@ -77,7 +85,12 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background image"
+      "label": "Background image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "Background image (Mobile)"
     },
     {
       "type": "header",

@@ -431,19 +431,19 @@ table:not([class]) th {
   border: 0.1rem solid rgba(var(--color-foreground), 0.2);
 }
 
-@media screen and (max-width: 749px) {
+@media screen and (max-width: 767px) {
   .small-hide {
     display: none !important;
   }
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
+@media screen and (min-width: 768px) and (max-width: 992px) {
   .medium-hide {
     display: none !important;
   }
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 993px) {
   .large-up-hide {
     display: none !important;
   }
@@ -3340,6 +3340,7 @@ details-disclosure>details {
   body:has(.custom-product-card) .slider-mobile-gutter.page-width.page-width-desktop .product-grid {
     width: 100% !important;
     padding: 0 9rem !important;
+    padding-bottom: 4rem !important;
   }
 
   /* Override grid item widths for full-width layout */

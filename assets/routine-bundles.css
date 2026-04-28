@@ -13,7 +13,7 @@
 
 @media screen and (min-width: 750px) {
   .routine-title-container {
-    width: 113%;
+    width: 100%;
   }
 }
 
@@ -75,6 +75,33 @@
 @media screen and (max-width: 767px) {
   .routine-collection-boxes .collection-box {
     padding: 6px 13px;
+  }
+}
+
+/* Apply margins to collection title when routine set bundles is enabled */
+body:has(.routine-bundles-badge) .collection__title.title-wrapper:has(.routine-heading) {
+  margin-left: 6%;
+  margin-right: 6%;
+}
+
+/* Desktop styles to prevent overflow */
+@media screen and (min-width: 750px) {
+  .routine-collection-boxes {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+/* Tablet specific fix for right-side overflow */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .routine-collection-boxes {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex: 1;
   }
 }
 

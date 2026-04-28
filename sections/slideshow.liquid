@@ -602,7 +602,8 @@
   {%- endif -%}
 
   {%- if section.settings.enable_custom_layout and section.blocks.size > 1 -%}
-    <div class="custom-nav-buttons">
+    <!-- TEMPORARILY HIDDEN - Remove 'display-none' class to show navigation buttons again -->
+    <div class="custom-nav-buttons" style="display: none;">
       <button type="button" class="custom-nav-btn custom-nav-prev" aria-label="Previous slide">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
