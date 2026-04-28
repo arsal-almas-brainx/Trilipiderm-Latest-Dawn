@@ -1,0 +1,149 @@
+{{ 'review-section.css' | asset_url | stylesheet_tag }}
+
+<div class="review-section">
+  <div class="review-section__container">
+    <!-- Top Headings -->
+    <div class="review-section__header">
+      <h3 class="review-section__subtitle">{{ section.settings.main_heading }}</h3>
+      <h2 class="review-section__main-heading">{{ section.settings.rating_text }}</h2>
+    </div>
+
+    <!-- Review Cards -->
+    <div class="review-section__cards-container">
+      <div class="review-section__cards-scroll">
+        {% for block in section.blocks %}
+          {% if block.type == 'review_card' %}
+            <div class="review-card" {{ block.shopify_attributes }}>
+              <!-- Stars at the top -->
+              <div class="review-card__stars">
+                {% assign card_rating = block.settings.card_rating %}
+                {% for i in (1..5) %}
+                  {% assign half_star = card_rating | minus: i | plus: 0.5 %}
+                  {% if card_rating >= i %}
+                    <span class="star filled">★</span>
+                  {% elsif half_star >= i %}
+                    <span class="star half-filled">★</span>
+                  {% else %}
+                    <span class="star">★</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              
+              <!-- Review text in the middle -->
+              <div class="review-card__text">
+                <p>{{ section.settings.review_text }}</p>
+              </div>
+              
+              <!-- Bottom section with image and info -->
+              <div class="review-card__footer">
+                <div class="review-card__image">
+                  {% if block.settings.card_image != blank %}
+                    <img src="{{ block.settings.card_image | image_url: width: 80 }}" 
+                         alt="{{ block.settings.card_image.alt | escape }}"
+                         width="80"
+                         height="80"
+                         loading="lazy">
+                  {% else %}
+                    <div class="review-card__placeholder">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                  {% endif %}
+                </div>
+                <div class="review-card__info">
+                  <p class="review-card__name">{{ block.settings.reviewer_name }}</p>
+                  <p class="review-card__comment">{{ block.settings.reviewer_comment }}</p>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "HEAR THEIR STORIES"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating Text",
+      "default": "Rated 5/5 Stars"
+    },
+    {
+      "type": "range",
+      "id": "star_rating",
+      "label": "Star Rating",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_text",
+      "label": "Review Text",
+      "default": "If you're going to pay full price for a product, skip: Tatcha, Lancome, etc. and buy everything from Sonia's line. It works, it works better than most products"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Card Image"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name",
+          "default": "Olivia B."
+        },
+        {
+          "type": "text",
+          "id": "reviewer_comment",
+          "label": "Reviewer Comment",
+          "default": "It's The Best"
+        },
+        {
+          "type": "range",
+          "id": "card_rating",
+          "label": "Card Rating",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Reviews",
+      "blocks": [
+        {
+          "type": "review_card"
+        },
+        {
+          "type": "review_card"
+        },
+        {
+          "type": "review_card"
+        },
+        {
+          "type": "review_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
