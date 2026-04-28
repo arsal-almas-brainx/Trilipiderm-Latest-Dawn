@@ -150,7 +150,7 @@
 
     <!-- Row 3: Copyright + Payment -->
     <div class="footer-row-3">
-      <p class="footer__copyright-text">&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}</p>
+      <p class="footer__copyright-text">{{ section.settings.custom_footer_copyright }}</p>
       {%- if section.settings.payment_enable -%}
         <div class="footer__payment">
           <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
@@ -635,9 +635,9 @@
       "label": "Contact heading"
     },
     {
-      "type": "inline_richtext",
+      "type": "textarea",
       "id": "custom_footer_contact_info",
-      "default": "Mon - Fri 9am - 5pm (MST) 307.733.4427 support@trilipiderm.com",
+      "default": "Mon - Fri 9am - 5pm (MST)\n307.733.4427 support@trilipiderm.com",
       "label": "Contact info"
     },
     {
@@ -651,10 +651,21 @@
       "label": "Business inquiry heading"
     },
     {
-      "type": "inline_richtext",
+      "type": "textarea",
       "id": "custom_footer_business_email",
       "default": "info@trilipiderm.com",
       "label": "Business email"
+    },
+    {
+      "type": "header",
+      "content": "Custom Footer - Copyright"
+    },
+    {
+      "type": "richtext",
+      "id": "custom_footer_copyright",
+      "default": "<p>Copyright</p>",
+      "label": "Copyright text",
+      "info": "Italic text will be converted to underline and link to homepage"
     },
     {
       "type": "header",
