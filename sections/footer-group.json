@@ -13,8 +13,45 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "custom_menu_P8j9ch": {
+          "type": "custom_menu",
+          "settings": {
+            "heading": "Main",
+            "menu": "footer-main"
+          }
+        },
+        "custom_menu_A9FB9d": {
+          "type": "custom_menu",
+          "settings": {
+            "heading": "About Trilipiderm",
+            "menu": "footer-about-trilipiderm"
+          }
+        },
+        "custom_menu_Fq6LJr": {
+          "type": "custom_menu",
+          "settings": {
+            "heading": "Legal",
+            "menu": "footer-legal"
+          }
+        }
+      },
+      "block_order": [
+        "custom_menu_P8j9ch",
+        "custom_menu_A9FB9d",
+        "custom_menu_Fq6LJr"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
+        "enable_custom_footer": true,
+        "custom_footer_heading": "20% off to new subscribers",
+        "custom_footer_subtext": "Subscribe to get notified about new arrivals, special offers and news.",
+        "custom_footer_email_placeholder": "Enter your email address",
+        "custom_footer_subscribe_btn": "SUBSCRIBE",
+        "custom_footer_contact_heading": "Contact us anytime !",
+        "custom_footer_contact_info": "Mon - Fri 9am - 5pm (MST) 307.733.4427 support@trilipiderm.com",
+        "custom_footer_business_heading": "Business inquiries:",
+        "custom_footer_business_email": "info@trilipiderm.com",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": true,

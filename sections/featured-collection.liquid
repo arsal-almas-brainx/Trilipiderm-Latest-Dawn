@@ -3,6 +3,14 @@
 
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'custom-card.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.enable_routine_set_bundles -%}
+  {{ 'routine-bundles.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'routine-bundles.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- if section.settings.enable_trending_section -%}
+  {{ 'trending-section.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -34,6 +42,136 @@
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .best-sellers-badge {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4A7FA5;
+    margin-bottom: 8px;
+  }
+
+  .collection__title .title:not(:only-child) {
+    margin-top: 8px;
+  }
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E8E2DA;
+  }
+
+  @media screen and (min-width: 750px) {
+    .title-container {
+      width: 100%;
+    }
+  }
+
+  .best-sellers-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  @media screen and (min-width: 750px) {
+    .best-sellers-title {
+      font-size: 36px;
+      font-weight: 700;
+    }
+  }
+
+  .view-all-link {
+    color: #1a1a1a;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0;
+    white-space: nowrap;
+    padding-bottom: 2px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .view-all-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 96%;
+    height: 1px;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+  }
+
+  @media screen and (max-width: 767px) {
+    .view-all-link {
+      font-size: 12px;
+      width: 22%;
+      white-space: normal;
+    }
+  }
+
+  .view-all-link:hover {
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  /* Apply margins to collection title when best sellers is enabled */
+  body:has(.best-sellers-badge) .collection__title.title-wrapper:has(.best-sellers-title) {
+    margin-left: 6%;
+    margin-right: 6%;
+  }
+
+  /* Best Sellers horizontal scrolling styles */
+  @media screen and (min-width: 750px) {
+    .collection:has(.best-sellers-title) .slider-component {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: #4A7FA5 #E8E2DA;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .collection:has(.best-sellers-title) .slider-component::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      gap: 0 !important;
+      width: max-content !important;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid .grid__item {
+      flex-shrink: 0 !important;
+      width: 249px !important;
+      max-width: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid .grid__item .card-wrapper {
+      width: 100%;
+      height: 400px;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid .grid__item .card {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #E8E2DA;
+      border-right: none;
+    }
+
+    .collection:has(.best-sellers-title) .product-grid .grid__item:last-child .card {
+      border-right: 1px solid #E8E2DA;
     }
   }
 {%- endstyle -%}
@@ -72,11 +210,52 @@
     id="collection-{{ section.id }}"
     data-id="{{ section.id }}"
   >
-    <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
+    {%- unless section.settings.enable_trending_section -%}
+    <div class="collection__title title-wrapper title-wrapper--no-top-margin{% unless section.settings.enable_routine_set_bundles or section.settings.enable_best_sellers %} page-width{% endunless %}{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
+      {%- if section.settings.enable_best_sellers and section.settings.best_sellers_text != blank -%}
+        <div class="best-sellers-badge{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.best_sellers_text }}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.enable_routine_set_bundles and section.settings.routine_bundles_badge_text != blank -%}
+        <div class="routine-bundles-badge{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.routine_bundles_badge_text }}
+        </div>
+      {%- endif -%}
       {%- if section.settings.title != blank -%}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ section.settings.title }}
-        </h2>
+        {%- if section.settings.enable_routine_set_bundles -%}
+          <div class="routine-title-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            <h2 class="title inline-richtext {{ section.settings.heading_size }} routine-heading">
+              {{ section.settings.title }}
+            </h2>
+            {%- if section.settings.enable_routine_set_bundles and section.blocks.size > 0 -%}
+              <div class="routine-collection-boxes" data-section-id="{{ section.id }}">
+                {%- for block in section.blocks -%}
+                  <button
+                    type="button"
+                    class="collection-box{% if forloop.first %} active{% endif %}"
+                    data-collection-index="{{ forloop.index0 }}"
+                    data-section-id="{{ section.id }}"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{ block.settings.box_text }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <div class="title-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if section.settings.enable_best_sellers %} best-sellers-title{% endif %}">
+              {{ section.settings.title }}
+            </h2>
+            {%- if section.settings.enable_best_sellers and section.settings.view_all_text != blank -%}
+              <a href="{{ section.settings.collection.url }}" class="view-all-link">
+                {{ section.settings.view_all_text }} →
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       {%- endif -%}
       {%- if section.settings.description != blank
         or section.settings.show_description
@@ -91,7 +270,9 @@
         </div>
       {%- endif -%}
     </div>
+    {%- endunless -%}
 
+    {%- unless section.settings.enable_routine_set_bundles or section.settings.enable_trending_section -%}
     <slider-component class="slider-mobile-gutter{% if section.settings.full_width %} slider-component-full-width{% endif %}{% if show_mobile_slider == false %} page-width{% endif %}{% if show_desktop_slider == false and section.settings.full_width == false %} page-width-desktop{% endif %}{% if show_desktop_slider %} slider-component-desktop{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <ul
         id="Slider-{{ section.id }}"
@@ -197,7 +378,7 @@
       {%- endif -%}
     </slider-component>
 
-    {%- if section.settings.show_view_all and more_in_collection -%}
+    {%- if section.settings.show_view_all and more_in_collection and section.settings.enable_best_sellers == false and section.settings.enable_trending_section == false -%}
       <div class="center collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <a
           href="{{ section.settings.collection.url }}"
@@ -206,6 +387,151 @@
         >
           {{ 'sections.featured_collection.view_all' | t }}
         </a>
+      </div>
+    {%- endif -%}
+    {%- endunless -%}
+
+    {%- if section.settings.enable_routine_set_bundles -%}
+      <div class="routine-bundles-wrapper" data-section-id="{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- assign block_collection = block.settings.box_collection -%}
+          <div class="routine-collection-products{% if forloop.first %} active{% endif %}" data-collection-index="{{ forloop.index0 }}" data-section-id="{{ section.id }}">
+            <div class="routine-bundles-container">
+              {%- if section.settings.routine_bundle_image != blank -%}
+                <div class="routine-bundle-image-card">
+                  <img
+                    src="{{ section.settings.routine_bundle_image | image_url: width: 500 }}"
+                    alt="{{ section.settings.routine_bundle_text_1 }} {{ section.settings.routine_bundle_text_2 }}"
+                    width="249"
+                    height="400"
+                    loading="lazy"
+                  >
+                  <div class="bundle-image-text">
+                    <p class="text-line-1">{{ section.settings.routine_bundle_text_1 }}</p>
+                    <p class="text-line-2">{{ section.settings.routine_bundle_text_2 }}</p>
+                  </div>
+                </div>
+              {%- endif -%}
+              <div class="routine-bundles-slider">
+                <div class="routine-bundles-grid">
+                  {%- if block_collection != blank and block_collection.products.size > 0 -%}
+                    {%- for product in block_collection.products limit: section.settings.products_to_show -%}
+                      <div class="grid__item">
+                        {% render 'card-product',
+                          card_product: product,
+                          media_aspect_ratio: section.settings.image_ratio,
+                          image_shape: section.settings.image_shape,
+                          lazy_load: true,
+                          show_secondary_image: section.settings.show_secondary_image,
+                          show_vendor: section.settings.show_vendor,
+                          show_rating: section.settings.show_rating,
+                          section_id: section.id,
+                          quick_add: section.settings.quick_add
+                        %}
+                      </div>
+                    {%- endfor -%}
+                  {%- else -%}
+                    {%- for i in (1..4) -%}
+                      <div class="grid__item">
+                        {% liquid
+                          assign ridx = forloop.rindex
+                          case ridx
+                            when 5
+                              assign ridx = 1
+                            when 6
+                              assign ridx = 2
+                          endcase
+                        %}
+                        {%- assign placeholder_image = 'product-apparel-' | append: ridx -%}
+                        {% render 'card-product',
+                          show_vendor: section.settings.show_vendor,
+                          media_aspect_ratio: section.settings.image_ratio,
+                          image_shape: section.settings.image_shape,
+                          lazy_load: false,
+                          placeholder_image: placeholder_image
+                        %}
+                      </div>
+                    {%- endfor -%}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.enable_trending_section -%}
+      <div class="trending-section-wrapper" data-section-id="{{ section.id }}">
+        <div class="trending-section-container">
+          {%- if section.settings.trending_image != blank -%}
+            <div class="trending-image-block">
+              <img
+                src="{{ section.settings.trending_image | image_url: width: 590 }}"
+                alt="{{ section.settings.title }}"
+                width="590"
+                height="570"
+                loading="lazy"
+              >
+            </div>
+          {%- endif -%}
+          <div class="trending-content">
+            {%- if section.settings.trending_title != blank -%}
+              <h2 class="trending-heading{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                {{ section.settings.trending_title }}
+              </h2>
+            {%- endif -%}
+            {%- if section.settings.trending_subheading != blank -%}
+              <p class="trending-subheading{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                {{ section.settings.trending_subheading }}
+              </p>
+            {%- endif -%}
+            <div class="trending-cards-slider">
+              <div class="trending-cards-grid">
+                {%- assign trending_collection = section.settings.trending_collection -%}
+                {%- if trending_collection != blank and trending_collection.products.size > 0 -%}
+                  {%- for product in trending_collection.products limit: section.settings.products_to_show -%}
+                    <div class="grid__item">
+                      {% render 'card-product',
+                        card_product: product,
+                        media_aspect_ratio: section.settings.image_ratio,
+                        image_shape: section.settings.image_shape,
+                        lazy_load: true,
+                        show_secondary_image: section.settings.show_secondary_image,
+                        show_vendor: section.settings.show_vendor,
+                        show_rating: section.settings.show_rating,
+                        section_id: section.id,
+                        quick_add: section.settings.quick_add
+                      %}
+                    </div>
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- for i in (1..4) -%}
+                    <div class="grid__item">
+                      {% liquid
+                        assign ridx = forloop.rindex
+                        case ridx
+                          when 5
+                            assign ridx = 1
+                          when 6
+                            assign ridx = 2
+                        endcase
+                      %}
+                      {%- assign placeholder_image = 'product-apparel-' | append: ridx -%}
+                      {% render 'card-product',
+                        show_vendor: section.settings.show_vendor,
+                        media_aspect_ratio: section.settings.image_ratio,
+                        image_shape: section.settings.image_shape,
+                        lazy_load: false,
+                        placeholder_image: placeholder_image
+                      %}
+                    </div>
+                  {%- endfor -%}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     {%- endif -%}
     {% if section.settings.image_shape == 'arch' %}
@@ -496,6 +822,101 @@
     },          
     {
       "type": "header",
+      "content": "Best Sellers"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_best_sellers",
+      "label": "Enable Best Sellers",
+      "default": false,
+      "info": "Only one mode can be active at a time (Best Sellers, Routine Set Bundles, or Trending Section)"
+    },
+    {
+      "type": "text",
+      "id": "best_sellers_text",
+      "label": "Best Sellers Text",
+      "default": "BEST SELLERS",
+      "info": "Text that appears above the heading"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Text",
+      "default": "View All",
+      "info": "Text for the View All link"
+    },
+    {
+      "type": "header",
+      "content": "Routine Set Bundles"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_routine_set_bundles",
+      "label": "Enable Routine Set Bundles",
+      "default": false,
+      "info": "Only one mode can be active at a time (Best Sellers, Routine Set Bundles, or Trending Section)"
+    },
+    {
+      "type": "text",
+      "id": "routine_bundles_badge_text",
+      "label": "Routine Bundles Badge Text",
+      "default": "ROUTINE SETS",
+      "info": "Text that appears above the heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "routine_bundle_image",
+      "label": "Bundle Image Card"
+    },
+    {
+      "type": "text",
+      "id": "routine_bundle_text_1",
+      "label": "Image Text Line 1",
+      "default": "ROUTINE",
+      "info": "First line of text on the bundle image card"
+    },
+    {
+      "type": "text",
+      "id": "routine_bundle_text_2",
+      "label": "Image Text Line 2",
+      "default": "SET BUNDLES",
+      "info": "Second line of text on the bundle image card"
+    },
+    {
+      "type": "header",
+      "content": "Trending Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_trending_section",
+      "label": "Enable Trending Section",
+      "default": false,
+      "info": "Only one mode can be active at a time (Best Sellers, Routine Set Bundles, or Trending Section)"
+    },
+    {
+      "type": "image_picker",
+      "id": "trending_image",
+      "label": "Trending Image (590x570)"
+    },
+    {
+      "type": "collection",
+      "id": "trending_collection",
+      "label": "Trending Collection"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "trending_title",
+      "label": "Trending Title",
+      "default": "Trending Products"
+    },
+    {
+      "type": "text",
+      "id": "trending_subheading",
+      "label": "Trending Subheading",
+      "info": "Text that appears under the heading"
+    },
+    {
+      "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
     },
     {
@@ -519,9 +940,52 @@
       "default": 36
     }
   ],
+  "blocks": [
+    {
+      "type": "collection_box",
+      "name": "Collection Box",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "box_text",
+          "label": "Box Text",
+          "default": "Collection"
+        },
+        {
+          "type": "collection",
+          "id": "box_collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "t:sections.featured-collection.presets.name"
+      "name": "t:sections.featured-collection.presets.name",
+      "blocks": [
+        {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "FACE",
+            "box_collection": ""
+          }
+        },
+        {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "BODY",
+            "box_collection": ""
+          }
+        },
+        {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "LIPS",
+            "box_collection": ""
+          }
+        }
+      ]
     }
   ]
 }

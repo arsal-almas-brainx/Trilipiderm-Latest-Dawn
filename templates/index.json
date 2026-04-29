@@ -9,62 +9,268 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "slideshow_z6cMWz": {
+      "type": "slideshow",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "slide_RxVzDr": {
+          "type": "slide",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "",
+            "custom_txt_1": "NEW - SPRING REVIVAL COLLECTION",
+            "custom_txt_1_color": "#4a7fa5",
+            "custom_txt_1_size": 10,
+            "custom_txt_2": "Barrier Repair Starts Here",
+            "custom_txt_2_color": "#1a1a1a",
+            "custom_txt_2_size": 50,
+            "custom_txt_3": "Science-backed actives meet clean botanicals. Our patented Medayssinian Lipid Complex rebuilds your skin barrier from the inside out.",
+            "custom_txt_3_color": "#4f4f4f",
+            "custom_txt_3_size": 14,
+            "custom_left_button_text": "SHOP NOW",
+            "custom_left_button_link": "shopify://pages/new_home_page_1748012686316",
+            "custom_left_button_bg": "#4a7fa5",
+            "custom_left_button_text_color": "#ffffff",
+            "custom_left_button_border": 0,
+            "custom_left_button_border_color": "#000000",
+            "custom_right_button_text": "FIND MY ROUTINE",
+            "custom_right_button_link": "shopify://pages/new_home_page_1748012686316",
+            "custom_right_button_bg": "#f5f5f5",
+            "custom_right_button_text_color": "#1a1a1a",
+            "custom_right_button_border": 2,
+            "custom_right_button_border_color": "#1a1a1a",
+            "custom_star_color": "#ffaa00",
+            "custom_star_width": 24,
+            "custom_star_height": 24,
+            "custom_rating_text": "Join 100,000+ Happy Customers",
+            "custom_rating_text_color": "#1a1a1a",
+            "custom_rating_text_size": 14,
+            "custom_icon_1": "shopify://shop_images/Group_1000015121.png",
+            "custom_icon_2": "shopify://shop_images/Group_1000015121.png",
+            "custom_icon_3": "shopify://shop_images/Group_1000015121.png",
+            "custom_media_type": "video",
+            "custom_right_image": "shopify://shop_images/Rectangle_2.jpg",
+            "custom_right_video_url": ""
           }
         },
-        "button": {
-          "type": "buttons",
+        "slide_MqcazG": {
+          "type": "slide",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "",
+            "custom_txt_1": "New - Spring Revival Collection",
+            "custom_txt_1_color": "#000000",
+            "custom_txt_1_size": 10,
+            "custom_txt_2": "Barrier Repair Starts Here",
+            "custom_txt_2_color": "#000000",
+            "custom_txt_2_size": 50,
+            "custom_txt_3": "Science-backed actives meet clean botanicals. Our patented Medayssinian Lipid Complex rebuilds your skin barrier from the inside out.",
+            "custom_txt_3_color": "#000000",
+            "custom_txt_3_size": 14,
+            "custom_left_button_text": "SHOP NOW",
+            "custom_left_button_link": "",
+            "custom_left_button_bg": "#000000",
+            "custom_left_button_text_color": "#ffffff",
+            "custom_left_button_border": 0,
+            "custom_left_button_border_color": "#000000",
+            "custom_right_button_text": "FIND MY ROUTINE",
+            "custom_right_button_link": "",
+            "custom_right_button_bg": "#ffffff",
+            "custom_right_button_text_color": "#000000",
+            "custom_right_button_border": 0,
+            "custom_right_button_border_color": "#000000",
+            "custom_star_color": "#ffaa00",
+            "custom_star_width": 24,
+            "custom_star_height": 24,
+            "custom_rating_text": "Join 100,000+ Happy Customers",
+            "custom_rating_text_color": "#000000",
+            "custom_rating_text_size": 14,
+            "custom_media_type": "image",
+            "custom_right_video": "shopify://files/videos/10001-0210.mp4",
+            "custom_right_video_url": ""
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "slide_RxVzDr",
+        "slide_MqcazG"
       ],
+      "name": "t:sections.slideshow.presets.name",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
         "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "enable_custom_layout": true,
+        "custom_autoplay_speed": 5,
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "icon_slider_gPmijt": {
+      "type": "icon-slider",
+      "name": "Icon Slider",
+      "settings": {
+        "background_color": "#1b2d4f",
+        "text_color": "#ffffff",
+        "font_size": 14,
+        "text_1": "Clinically-Driven Skincare",
+        "text_2": "Eco-Friendly Commitment",
+        "text_3": "100K+ Trust Us",
+        "text_4": "Cruelty Free"
+      }
+    },
+    "tile_slider_ni3bkU": {
+      "type": "tile-slider",
+      "blocks": {
+        "svg_tile_7ypfUx": {
+          "type": "svg_tile",
+          "settings": {
+            "text": "VIEW ALL",
+            "link": "shopify://collections",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_DePjrj": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6.png",
+            "text": "THE GLOW EDIT",
+            "link": "shopify://collections/the-glow-edit",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_Cbawan": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_5.png",
+            "text": "FACE CARE",
+            "link": "shopify://collections/face-hydrating-restorative-skincare",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_CNjzDB": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_1.png",
+            "text": "BODY CARE",
+            "link": "shopify://collections/moisturizers",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_dJjkhr": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_2.png",
+            "text": "ANTI AGING",
+            "link": "shopify://collections/anti-aging-age-defying-skincare",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_qrh4h8": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_3.png",
+            "text": "ACNE THERAPY",
+            "link": "shopify://collections/acne-therapy-natural-clarifying-skincare",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_ei9FMt": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_4.png",
+            "text": "SPF PRODUCTS",
+            "link": "shopify://collections/the-glow-edit",
+            "font_weight": "600"
+          }
+        },
+        "image_tile_3aDwgK": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_5.png",
+            "text": "SKIN RITUALS",
+            "link": "shopify://collections/skin-rituals-gift-sets",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_fimK88": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6_5.png",
+            "text": "BEST SELLERS",
+            "link": "shopify://collections/best-sellers",
+            "font_weight": "400"
+          }
+        },
+        "image_tile_q739NL": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_6.png",
+            "text": "SALE",
+            "link": "shopify://collections/the-glow-edit",
+            "font_weight": "600"
+          }
+        }
+      },
+      "block_order": [
+        "svg_tile_7ypfUx",
+        "image_tile_DePjrj",
+        "image_tile_Cbawan",
+        "image_tile_CNjzDB",
+        "image_tile_dJjkhr",
+        "image_tile_qrh4h8",
+        "image_tile_ei9FMt",
+        "image_tile_3aDwgK",
+        "image_tile_fimK88",
+        "image_tile_q739NL"
+      ],
+      "name": "Tile Slider",
+      "settings": {
+        "background_color": "#faf6f0",
+        "text_color": "#1a1a1a",
+        "font_size": 14,
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
+        "collection": "best-sellers",
+        "products_to_show": 5,
+        "title": "OUR BEST SELLERS",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "columns_desktop": 5,
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -72,13 +278,253 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "enable_best_sellers": true,
+        "best_sellers_text": "MOST LOVED",
+        "view_all_text": "SHOP ALL PRODUCTS",
+        "enable_routine_set_bundles": false,
+        "routine_bundles_badge_text": "ROUTINE SETS",
+        "routine_bundle_text_1": "ROUTINE",
+        "routine_bundle_text_2": "SET BUNDLES",
+        "enable_trending_section": false,
+        "trending_collection": "",
+        "trending_title": "Trending Products",
+        "trending_subheading": "",
         "padding_top": 44,
+        "padding_bottom": 80
+      }
+    },
+    "quiz_section_nxNntK": {
+      "type": "quiz-section",
+      "name": "Quiz Section",
+      "settings": {
+        "heading_text": "Find Your Right Product:",
+        "prefix_text": "I have",
+        "middle_text": "& I 'm looking for",
+        "dropdown1_placeholder": "skin type",
+        "dropdown1_options": "Combination Skin,Sensitive,Normal Skin,Oily Skin,Acne Prone",
+        "dropdown2_placeholder": "product type",
+        "dropdown2_options": "Cleanser,Exfoliant,Serums,Toners,Moisturizer,Eye Serum,Sun Protection,Full Routine,Unsure",
+        "button_text": "START QUIZ",
+        "button_link": "",
+        "right_image": "shopify://shop_images/close-up-portrait-young-beatufiul-woman-looking-mirror-fixing-her-makeup-touching-soft-clear-skin-standing-beige-background_1.png",
+        "mobile_image": "shopify://shop_images/close-up-portrait-young-beatufiul-woman-looking-mirror-fixing-her-makeup-touching-soft-clear-skin-standing-beige-background_1.png",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_G4YfAm": {
+      "type": "featured-collection",
+      "blocks": {
+        "collection_box_UqGf7b": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "SENSITIVE SKIN",
+            "box_collection": "beauty-botanical-clinical-skincare-essentials"
+          }
+        },
+        "collection_box_QNnV7Y": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "ACNE THERAPY",
+            "box_collection": "acne-therapy-natural-clarifying-skincare"
+          }
+        },
+        "collection_box_gEXp6i": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "ANTI AGING",
+            "box_collection": "anti-aging-age-defying-skincare"
+          }
+        }
+      },
+      "block_order": [
+        "collection_box_UqGf7b",
+        "collection_box_QNnV7Y",
+        "collection_box_gEXp6i"
+      ],
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "",
+        "products_to_show": 5,
+        "title": "ROUTINE SET BUNDLES",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 5,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "enable_best_sellers": false,
+        "best_sellers_text": "BEST SELLERS",
+        "view_all_text": "View All",
+        "enable_routine_set_bundles": true,
+        "routine_bundles_badge_text": "MOST LOVED",
+        "routine_bundle_image": "shopify://shop_images/Background_Border_1.png",
+        "routine_bundle_text_1": "Transform Your Skin Routine",
+        "routine_bundle_text_2": "Your Skin Deserves the Best",
+        "enable_trending_section": false,
+        "trending_collection": "",
+        "trending_title": "Trending Products",
+        "trending_subheading": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_px9Wgj": {
+      "type": "featured-collection",
+      "blocks": {
+        "collection_box_bdz83X": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "FACE",
+            "box_collection": ""
+          }
+        },
+        "collection_box_NFMLgL": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "BODY",
+            "box_collection": ""
+          }
+        },
+        "collection_box_dmERHU": {
+          "type": "collection_box",
+          "settings": {
+            "box_text": "LIPS",
+            "box_collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_box_bdz83X",
+        "collection_box_NFMLgL",
+        "collection_box_dmERHU"
+      ],
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "",
+        "products_to_show": 5,
+        "title": "#Trending on TIKTOK",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 5,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "enable_best_sellers": false,
+        "best_sellers_text": "BEST SELLERS",
+        "view_all_text": "View All",
+        "enable_routine_set_bundles": false,
+        "routine_bundles_badge_text": "ROUTINE SETS",
+        "routine_bundle_text_1": "ROUTINE",
+        "routine_bundle_text_2": "SET BUNDLES",
+        "enable_trending_section": true,
+        "trending_image": "shopify://shop_images/tik_tok_post.jpg",
+        "trending_collection": "beauty-botanical-clinical-skincare-essentials",
+        "trending_title": "#Trending on TIKTOK",
+        "trending_subheading": "See what influencers are loving right now.",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "most_loved_AEHWbn": {
+      "type": "most-loved",
+      "blocks": {
+        "column_ULtbnH": {
+          "type": "column",
+          "settings": {
+            "logo": "shopify://shop_images/Group_1000006161.png",
+            "big_text": "5.0",
+            "small_text": "Shop App Ratings Highly rated by users who’ve seen real results",
+            "image_width": "400",
+            "image_height": "50",
+            "bottom_text": ""
+          }
+        },
+        "column_3qq468": {
+          "type": "column",
+          "settings": {
+            "logo": "shopify://shop_images/Frame_cf3b082c-6259-4416-aaf1-cfce57a15962.png",
+            "big_text": "65%",
+            "small_text": "customer return rate trusted by thousands and proven through everyday use.",
+            "image_width": "400",
+            "image_height": "50",
+            "bottom_text": ""
+          }
+        },
+        "column_iXhJVc": {
+          "type": "column",
+          "settings": {
+            "logo": "shopify://shop_images/Group_1000006159.png",
+            "big_text": "40K+",
+            "small_text": "Creator trust us world wide",
+            "image": "shopify://shop_images/Group_378_1.png",
+            "image_width": "94",
+            "image_height": "42",
+            "bottom_text": ""
+          }
+        },
+        "column_TnncR4": {
+          "type": "column",
+          "settings": {
+            "logo": "shopify://shop_images/Group_1000006160.png",
+            "big_text": "1200+",
+            "small_text": "Creator shop listings",
+            "image": "shopify://shop_images/Group_383_1.png",
+            "image_width": "210",
+            "image_height": "26",
+            "bottom_text": "And Much More"
+          }
+        }
+      },
+      "block_order": [
+        "column_ULtbnH",
+        "column_3qq468",
+        "column_iXhJVc",
+        "column_TnncR4"
+      ],
+      "name": "Most Loved",
+      "settings": {
+        "background_image": "shopify://shop_images/image_1.png",
+        "heading": "MOST LOVED",
+        "subheading": "Clinically Loved by thousands",
+        "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "slideshow_z6cMWz",
+    "icon_slider_gPmijt",
+    "tile_slider_ni3bkU",
+    "featured_collection",
+    "quiz_section_nxNntK",
+    "featured_collection_G4YfAm",
+    "featured_collection_px9Wgj",
+    "most_loved_AEHWbn"
   ]
 }

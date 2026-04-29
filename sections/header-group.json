@@ -14,25 +14,47 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_xNPqpV": {
+          "type": "announcement",
+          "settings": {
+            "text": "SPRING REVIVAL — UP TO 40% OFF",
+            "link": ""
+          }
+        },
+        "announcement_bfF94d": {
+          "type": "announcement",
+          "settings": {
+            "text": "USE CODE SPRING40 AT CHECKOUT",
+            "link": ""
+          }
+        },
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "FREE SHIPPING OVER $50",
             "link": ""
           }
         }
       },
       "block_order": [
+        "announcement_xNPqpV",
+        "announcement_bfF94d",
         "announcement-bar-0"
       ],
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,
-        "enable_language_selector": false
+        "enable_language_selector": false,
+        "enable_custom_announcements": true,
+        "announcement_font": "sans_serif_n7",
+        "announcement_font_size": 12,
+        "padding_top": 8,
+        "padding_bottom": 8,
+        "custom_scroll_speed": 30
       }
     },
     "header": {
@@ -40,9 +62,9 @@
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
-        "menu": "main-menu",
+        "menu": "main-menu-new-dev",
         "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
+        "sticky_header_type": "always",
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
@@ -50,8 +72,20 @@
         "enable_language_selector": true,
         "enable_customer_avatar": true,
         "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "enable_custom_header": true,
+        "custom_logo": "shopify://shop_images/logo1.png",
+        "logo_margin_left": -20,
+        "logo_margin_right": 0,
+        "menu_font": "sans_serif_n4",
+        "menu_font_size": 14,
+        "menu_color": "#1a1a1a",
+        "menu_hover_color": "#4a7fa5",
+        "menu_margin_left": 0,
+        "menu_margin_right": 0,
+        "icons_margin_left": 0,
+        "icons_margin_right": 0
       }
     }
   },

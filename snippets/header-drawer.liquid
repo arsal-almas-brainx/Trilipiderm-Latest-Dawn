@@ -5,6 +5,8 @@
   {% render 'header-drawer' %}
 {% endcomment %}
 
+
+
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
@@ -12,7 +14,10 @@
       aria-label="{{ 'sections.header.menu' | t }}"
     >
       <span>
-        {{- 'icon-hamburger.svg' | inline_asset_content -}}
+        <svg class="icon-hamburger" width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 3.95312C0 3.35791 0.479911 2.875 1.07143 2.875H10.9286C11.5223 2.875 12 3.35791 12 3.95312C12 4.55059 11.5223 5.03125 10.9286 5.03125H1.07143C0.479911 5.03125 0 4.55059 0 3.95312ZM0 11.1406C0 10.5432 0.479911 10.0625 1.07143 10.0625H18.9286C19.5223 10.0625 20 10.5432 20 11.1406C20 11.7381 19.5223 12.2188 18.9286 12.2188H1.07143C0.479911 12.2188 0 11.7381 0 11.1406ZM18.9286 19.4062H9.07143C8.47991 19.4062 8 18.9256 8 18.3281C8 17.7307 8.47991 17.25 9.07143 17.25H18.9286C19.5223 17.25 20 17.7307 20 18.3281C20 18.9256 19.5223 19.4062 18.9286 19.4062Z" fill="#1A1A1A"/>
+        </svg>
+
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
@@ -139,7 +144,7 @@
             {%- if shop.customer_accounts_enabled -%}
               <a
                 href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-                class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide"
+                class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide{% if section.settings.enable_custom_header %} hide{% endif %}"
                 rel="nofollow"
               >
                 {%- if section.settings.enable_customer_avatar -%}

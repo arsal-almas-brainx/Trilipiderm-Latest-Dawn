@@ -4,6 +4,7 @@
 {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{{ 'custom-footer.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .footer {
@@ -27,6 +28,145 @@
   }
 {%- endstyle -%}
 
+{%- if section.settings.enable_custom_footer -%}
+<footer class="footer-trilipiderm section-{{ section.id }}-padding">
+  {%- liquid
+    assign has_social_icons = true
+    if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+      assign has_social_icons = false
+    endif
+  -%}
+  <div class="footer-trilipiderm__inner{% if section.settings.enable_custom_footer %}{% else %} page-width{% endif %}">
+    <!-- Row 1: Email subscribe -->
+    <div class="section-email">
+      <div class="left-text-container">
+        <h3 class="text-1">{{ section.settings.custom_footer_heading }}</h3>
+        <p class="text-2">{{ section.settings.custom_footer_subtext }}</p>
+      </div>
+      <div class="right-subscribe-container">
+        {%- form 'customer', id: 'CustomFooterNewsletter', class: 'newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter-form__field-wrapper">
+            <input
+              id="CustomFooterEmail"
+              type="email"
+              name="contact[email]"
+              class="field__input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              {% if form.errors %}
+                autofocus
+                aria-invalid="true"
+                aria-describedby="CustomFooterNewsletter-error"
+              {% elsif form.posted_successfully? %}
+                aria-describedby="CustomFooterNewsletter-success"
+              {% endif %}
+              placeholder="{{ section.settings.custom_footer_email_placeholder }}"
+              required
+            >
+            <button type="submit" class="email-btn" name="commit">
+              {{ section.settings.custom_footer_subscribe_btn }}
+            </button>
+          </div>
+          {%- if form.errors -%}
+            <small class="newsletter-form__message form__message" id="CustomFooterNewsletter-error">
+              {{- form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email -}}
+            </small>
+          {%- endif -%}
+          {%- if form.posted_successfully? -%}
+            <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="CustomFooterNewsletter-success" tabindex="-1" autofocus>
+              {{- 'newsletter.success' | t }}
+            </h3>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="footer-row-2">
+      <div class="footer-row-2-left">
+        <div class="contact-us">
+          <h3 class="contact-us-txt-1">{{ section.settings.custom_footer_contact_heading }}</h3>
+          <p class="contact-us-txt-2">{{ section.settings.custom_footer_contact_info }}</p>
+          {%- if has_social_icons -%}
+            <div class="social-media-container">
+              {%- if settings.social_facebook_link != blank -%}
+                <a href="{{ settings.social_facebook_link }}" aria-label="Facebook">
+                  <span class="svg-wrapper">{{- 'icon-facebook.svg' | inline_asset_content -}}</span>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_twitter_link != blank -%}
+                <a href="{{ settings.social_twitter_link }}" aria-label="Twitter">
+                  <span class="svg-wrapper">{{- 'icon-twitter.svg' | inline_asset_content -}}</span>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_instagram_link != blank -%}
+                <a href="{{ settings.social_instagram_link }}" aria-label="Instagram">
+                  <span class="svg-wrapper">{{- 'icon-instagram.svg' | inline_asset_content -}}</span>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_pinterest_link != blank -%}
+                <a href="{{ settings.social_pinterest_link }}" aria-label="Pinterest">
+                  <span class="svg-wrapper">{{- 'icon-pinterest.svg' | inline_asset_content -}}</span>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_youtube_link != blank -%}
+                <a href="{{ settings.social_youtube_link }}" aria-label="YouTube">
+                  <span class="svg-wrapper">{{- 'icon-youtube.svg' | inline_asset_content -}}</span>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_tiktok_link != blank -%}
+                <a href="{{ settings.social_tiktok_link }}" aria-label="TikTok">
+                  <span class="svg-wrapper">{{- 'icon-tiktok.svg' | inline_asset_content -}}</span>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="business-inquiry">
+          <h3 class="contact-us-txt-1">{{ section.settings.custom_footer_business_heading }}</h3>
+          <h3 class="contact-us-txt-1 grey-color">{{ section.settings.custom_footer_business_email }}</h3>
+        </div>
+      </div>
+      <div class="footer-row-2-right">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'custom_menu' -%}
+            <div class="footer-menu-trilipiderm" {{ block.shopify_attributes }}>
+              <h3 class="contact-us-txt-1">{{ block.settings.heading }}</h3>
+              {%- if block.settings.menu != blank -%}
+                {%- for link in block.settings.menu.links -%}
+                  <a href="{{ link.url }}" class="contact-us-txt-2">{{ link.title | escape }}</a>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Row 3: Copyright + Payment -->
+    <div class="footer-row-3">
+      <p class="footer__copyright-text">{{ section.settings.custom_footer_copyright }}</p>
+      {%- if section.settings.payment_enable -%}
+        <div class="footer__payment">
+          <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+          <ul class="list list-payment" role="list">
+            {%- for type in shop.enabled_payment_types -%}
+              <li class="list-payment__item">
+                {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+{%- else -%}
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {%- liquid
     assign has_social_icons = true
@@ -320,6 +460,7 @@
     </div>
   </div>
 </footer>
+{%- endif -%}
 
 {% schema %}
 {
@@ -421,6 +562,24 @@
           "default": "center"
         }
       ]
+    },
+    {
+      "type": "custom_menu",
+      "name": "Custom footer menu",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Main",
+          "label": "Menu heading"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
     }
   ],
   "settings": [
@@ -429,6 +588,84 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_footer",
+      "default": false,
+      "label": "Enable custom footer",
+      "info": "Toggle to use the custom Trilipiderm footer layout instead of the default theme footer"
+    },
+    {
+      "type": "header",
+      "content": "Custom Footer - Newsletter"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "custom_footer_heading",
+      "default": "20% off to new subscribers",
+      "label": "Newsletter heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "custom_footer_subtext",
+      "default": "Subscribe to get notified about new arrivals, special offers and news.",
+      "label": "Newsletter subtext"
+    },
+    {
+      "type": "text",
+      "id": "custom_footer_email_placeholder",
+      "default": "Enter your email address",
+      "label": "Email placeholder text"
+    },
+    {
+      "type": "text",
+      "id": "custom_footer_subscribe_btn",
+      "default": "SUBSCRIBE",
+      "label": "Subscribe button text"
+    },
+    {
+      "type": "header",
+      "content": "Custom Footer - Contact"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "custom_footer_contact_heading",
+      "default": "Contact us anytime !",
+      "label": "Contact heading"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_footer_contact_info",
+      "default": "Mon - Fri 9am - 5pm (MST)\n307.733.4427 support@trilipiderm.com",
+      "label": "Contact info"
+    },
+    {
+      "type": "header",
+      "content": "Custom Footer - Business Inquiry"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "custom_footer_business_heading",
+      "default": "Business inquiries:",
+      "label": "Business inquiry heading"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_footer_business_email",
+      "default": "info@trilipiderm.com",
+      "label": "Business email"
+    },
+    {
+      "type": "header",
+      "content": "Custom Footer - Copyright"
+    },
+    {
+      "type": "richtext",
+      "id": "custom_footer_copyright",
+      "default": "<p>Copyright</p>",
+      "label": "Copyright text",
+      "info": "Italic text will be converted to underline and link to homepage"
     },
     {
       "type": "header",
@@ -538,6 +775,15 @@
       },
       {
         "type": "text"
+      },
+      {
+        "type": "custom_menu"
+      },
+      {
+        "type": "custom_menu"
+      },
+      {
+        "type": "custom_menu"
       }
     ]
   }
